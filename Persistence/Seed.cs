@@ -11,7 +11,8 @@ namespace Persistence
         public static async Task SeedData(DataContext context)
         {
             if(context.Users.Any()) return;
-            var users = new List<User>()
+
+            var users = new List<User>
             {
                 new User() 
                 { 

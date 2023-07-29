@@ -9,7 +9,7 @@ namespace Persistence
         {}
 
         public DbSet<Activity> Activities { get; set; }
-        public DbSet<User> Users { get;}
+        public DbSet<User> Users { get; set;}
         public DbSet<Group> Groups{ get; set; }
         public DbSet<Company> Companies{ get; set; }
     }
