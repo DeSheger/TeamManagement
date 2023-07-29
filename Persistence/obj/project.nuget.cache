@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LnTYt59TPFR0peaR/ECnpcwmPsgqyBFCESKA3SnevT0FEwalOqK7MbCdFY4d3IluJ2ek+EMFtcVfLZgHRfdSag==",
+  "dgSpecHash": "hTkIBJNHK8aTyau0dIaBzLiSGyRjLlzMNVXtlXDpBla+sEbZ1+bvil3rqvFZtrEXowXORXhTnro9MvV0kfDtBg==",
   "success": true,
-  "projectFilePath": "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
+  "projectFilePath": "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pgste\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.9\\microsoft.data.sqlite.core.7.0.9.nupkg.sha512",
     "C:\\Users\\pgste\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.9\\microsoft.entityframeworkcore.7.0.9.nupkg.sha512",
