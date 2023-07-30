@@ -10,12 +10,10 @@ namespace Domain
     public class Company
     {
         [Key]
-        [Required]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Guid Leader { get; set; }
-        [NotMapped]
-        public List<Guid> Members { get; set; }
+        public User Leader { get; set; }
+        public ICollection<User>? Members { get; set; }
     }
 }

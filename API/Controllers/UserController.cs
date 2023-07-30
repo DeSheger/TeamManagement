@@ -18,10 +18,10 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<List<User>> GetUserList()
+        public async Task<ActionResult<List<User>>> GetUserList()
         {
             var result = await _context.Users.ToListAsync();
-
+            
             return result;
         }
     }

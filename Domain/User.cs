@@ -9,9 +9,8 @@ namespace Domain
     public class User
     {
         [Key]
-        [Required]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string Surname { get; set; }
+        public string Surrname { get; set; }
     }
 }
