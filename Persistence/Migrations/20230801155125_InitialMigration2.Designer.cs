@@ -11,14 +11,44 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230730173920_FixEntities2")]
-    partial class FixEntities2
+    [Migration("20230801155125_InitialMigration2")]
+    partial class InitialMigration2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.9");
+
+            modelBuilder.Entity("ActivityUser", b =>
+                {
+                    b.Property<int>("ActivitiesToDoId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MembersId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ActivitiesToDoId", "MembersId");
+
+                    b.HasIndex("MembersId");
+
+                    b.ToTable("ActivityUser");
+                });
+
+            modelBuilder.Entity("CompanyUser", b =>
+                {
+                    b.Property<int>("CompaniesMemberId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MembersId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("CompaniesMemberId", "MembersId");
+
+                    b.HasIndex("MembersId");
+
+                    b.ToTable("CompanyUser");
+                });
 
             modelBuilder.Entity("Domain.Activity", b =>
                 {
@@ -32,13 +62,16 @@ namespace Persistence.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("DateEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateStart")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("GroupId")
+                    b.Property<int?>("GroupId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
@@ -115,15 +148,6 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ActivityId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("GroupId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -134,19 +158,58 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ActivityId");
-
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("GroupId");
-
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("GroupUser", b =>
+                {
+                    b.Property<int>("GroupsMemberId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MembersId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("GroupsMemberId", "MembersId");
+
+                    b.HasIndex("MembersId");
+
+                    b.ToTable("GroupUser");
+                });
+
+            modelBuilder.Entity("ActivityUser", b =>
+                {
+                    b.HasOne("Domain.Activity", null)
+                        .WithMany()
+                        .HasForeignKey("ActivitiesToDoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User", null)
+                        .WithMany()
+                        .HasForeignKey("MembersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CompanyUser", b =>
+                {
+                    b.HasOne("Domain.Company", null)
+                        .WithMany()
+                        .HasForeignKey("CompaniesMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User", null)
+                        .WithMany()
+                        .HasForeignKey("MembersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Activity", b =>
                 {
                     b.HasOne("Domain.User", "Author")
-                        .WithMany()
+                        .WithMany("ActivitiesAuthor")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -159,9 +222,7 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Group", "Group")
                         .WithMany()
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GroupId");
 
                     b.Navigation("Author");
 
@@ -173,7 +234,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Company", b =>
                 {
                     b.HasOne("Domain.User", "Leader")
-                        .WithMany()
+                        .WithMany("CompaniesLeader")
                         .HasForeignKey("LeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -190,7 +251,7 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.User", "Leader")
-                        .WithMany()
+                        .WithMany("GroupsLeader")
                         .HasForeignKey("LeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -200,34 +261,28 @@ namespace Persistence.Migrations
                     b.Navigation("Leader");
                 });
 
+            modelBuilder.Entity("GroupUser", b =>
+                {
+                    b.HasOne("Domain.Group", null)
+                        .WithMany()
+                        .HasForeignKey("GroupsMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User", null)
+                        .WithMany()
+                        .HasForeignKey("MembersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.User", b =>
                 {
-                    b.HasOne("Domain.Activity", null)
-                        .WithMany("Members")
-                        .HasForeignKey("ActivityId");
+                    b.Navigation("ActivitiesAuthor");
 
-                    b.HasOne("Domain.Company", null)
-                        .WithMany("Members")
-                        .HasForeignKey("CompanyId");
+                    b.Navigation("CompaniesLeader");
 
-                    b.HasOne("Domain.Group", null)
-                        .WithMany("Members")
-                        .HasForeignKey("GroupId");
-                });
-
-            modelBuilder.Entity("Domain.Activity", b =>
-                {
-                    b.Navigation("Members");
-                });
-
-            modelBuilder.Entity("Domain.Company", b =>
-                {
-                    b.Navigation("Members");
-                });
-
-            modelBuilder.Entity("Domain.Group", b =>
-                {
-                    b.Navigation("Members");
+                    b.Navigation("GroupsLeader");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,8 +11,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230730172314_FixEntities")]
-    partial class FixEntities
+    [Migration("20230801150509_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,13 +26,16 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AuthorId")
+                    b.Property<int>("AuthorId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CompanyId")
+                    b.Property<int>("CompanyId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("DateEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateStart")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -46,6 +49,12 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("GroupId");
 
                     b.ToTable("Activities");
                 });
@@ -68,6 +77,8 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LeaderId");
 
                     b.ToTable("Companies");
                 });
@@ -93,6 +104,10 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("LeaderId");
 
                     b.ToTable("Groups");
                 });
@@ -131,6 +146,61 @@ namespace Persistence.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Domain.Activity", b =>
+                {
+                    b.HasOne("Domain.User", "Author")
+                        .WithMany("Activities")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("Domain.Company", b =>
+                {
+                    b.HasOne("Domain.User", "Leader")
+                        .WithMany("Companies")
+                        .HasForeignKey("LeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Leader");
+                });
+
+            modelBuilder.Entity("Domain.Group", b =>
+                {
+                    b.HasOne("Domain.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User", "Leader")
+                        .WithMany("Groups")
+                        .HasForeignKey("LeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Leader");
+                });
+
             modelBuilder.Entity("Domain.User", b =>
                 {
                     b.HasOne("Domain.Activity", null)
@@ -159,6 +229,15 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Group", b =>
                 {
                     b.Navigation("Members");
+                });
+
+            modelBuilder.Entity("Domain.User", b =>
+                {
+                    b.Navigation("Activities");
+
+                    b.Navigation("Companies");
+
+                    b.Navigation("Groups");
                 });
 #pragma warning restore 612, 618
         }

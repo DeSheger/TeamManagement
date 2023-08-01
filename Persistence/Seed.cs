@@ -66,29 +66,5 @@ namespace Persistence
             //Add leaders to companies
             
         }
-
-        public async Task UpdateData(DataContext _context)
-        {
-            var leader1 = _context.Users.Where(x => x.Name == "Piotr").FirstOrDefault();
-            var leader2 = _context.Users.Where(x => x.Name == "Rafal").FirstOrDefault();
-            var company1 = _context.Companies.Where(c => c.Name =="Asus").FirstOrDefault();
-            if(company1!=null&&leader2!=null)
-            {
-                company1.Leader = leader2;
-                await _context.SaveChangesAsync();
-            }
-
-            
-            var company2 = _context.Companies.Where(c => c.Name =="Lockhead Martin").FirstOrDefault();
-            if(company2!=null&&leader1!=null)
-            {
-                company2.Leader = leader1;
-                await _context.SaveChangesAsync();
-            }
-            await _context.SaveChangesAsync();
-            
-            //Add leaders to companies
-            
-        }
     }
 }

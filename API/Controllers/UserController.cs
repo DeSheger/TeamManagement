@@ -20,7 +20,10 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetUserList()
         {
-            var result = await _context.Users.ToListAsync();
+            var result = await _context.Users
+                .Include(u => u.CompaniesLeader)
+                .Include(u => u.CompaniesMember)
+                .ToListAsync();
             
             return result;
         }

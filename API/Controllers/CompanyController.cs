@@ -51,10 +51,10 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPatch("{id}")]
-        public async Task<ActionResult> EditCompany(Company company, int id)
+        [HttpPatch]
+        public async Task<ActionResult> EditCompany(Company company)
         {
-            var existCompany = await _context.Companies.FindAsync(id);
+            var existCompany = await _context.Companies.FindAsync(company.Id);
             var existLeader = await _context.Users.FindAsync(company.Leader.Id);
 
             existCompany.Name = company.Name;
