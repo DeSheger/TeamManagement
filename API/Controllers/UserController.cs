@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +14,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetUserList()
+        public async Task<ActionResult<List<User>>> GetUsersList()
         {
             var result = await _context.Users
                 .Include(u => u.CompaniesLeader)
@@ -26,6 +22,43 @@ namespace API.Controllers
                 .ToListAsync();
             
             return result;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(int id)
+        {
+            var result = await _context.Users
+                .FindAsync(id);
+            
+            return result;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateUser(User user)
+        {
+            var newUser = new User()
+            {
+                Name = user.Name,
+                Surrname = user.Surrname,
+            };
+
+            await _context.Users.AddAsync(newUser);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPatch]
+        public async Task<ActionResult> EditUser(User user)
+        {
+            var editedUser = await _context.Users.FindAsync(user.Id);
+
+            editedUser.Name = user.Name;
+            editedUser.Surrname = user.Surrname;
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }
