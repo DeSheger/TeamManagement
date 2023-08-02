@@ -20,7 +20,9 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Company>>> GetACompanyList()
         {
-            var result = await _context.Companies.Include(x => x.Leader).Include(x => x.Members).ToListAsync();
+            var result = await _context.Companies
+            .Include(x => x.Leader)
+            .Include(x => x.Members).ToListAsync();
             return result;
         }
 
