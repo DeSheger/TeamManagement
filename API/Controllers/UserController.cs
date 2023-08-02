@@ -17,8 +17,6 @@ namespace API.Controllers
         public async Task<ActionResult<List<User>>> GetUsersList()
         {
             var result = await _context.Users
-                .Include(u => u.CompaniesLeader)
-                .Include(u => u.CompaniesMember)
                 .ToListAsync();
             
             return result;

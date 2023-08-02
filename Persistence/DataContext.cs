@@ -15,6 +15,7 @@ namespace Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         modelBuilder.Entity<Activity>()
                     .HasOne(a => a.Author)
                     .WithMany(u => u.ActivitiesAuthor);
