@@ -60,5 +60,15 @@ namespace API.Controllers
 
             return Ok();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteUser(int id)
+        {
+            var result = await _context.Users.FindAsync(id);
+            _context.Users.Remove(result);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
