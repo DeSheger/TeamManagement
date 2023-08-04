@@ -29,6 +29,29 @@ namespace API.Controllers
             return result;
         }
 
+        [HttpGet("activitiesForMember/{userId}")]
+        public async Task<ActionResult<List<Activity>>> GetActivitiesForMember(int userId)
+        {
+
+            var user = await _context.Users
+                .Include(u => u.ActivitiesToDo) 
+                    .ThenInclude(a => a.Company)
+                .Include(u => u.ActivitiesToDo) 
+                    .ThenInclude(a => a.Group)
+                .Include(u => u.ActivitiesToDo)
+                    .ThenInclude(a => a.Author)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return NotFound(); 
+            }
+            
+            var activitiesForMember = user.ActivitiesToDo.ToList();
+
+            return activitiesForMember;
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Activity>> GetActivity(int id)
         {
