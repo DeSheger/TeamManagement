@@ -32,7 +32,11 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Activity>> GetActivity(int id)
         {
-            var result = await _context.Activities.FindAsync(id);
+            var result = await _context.Activities
+            .Include(x => x.Author)
+            .Include(x => x.Company)
+            .Include(x => x.Group)
+            .Include(x => x.Members).FirstOrDefaultAsync(c => c.Id == id);
 
             return result;
         }

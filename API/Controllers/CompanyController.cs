@@ -29,7 +29,10 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Company>> GetCompany(int id)
         {
-            var result = await _context.Companies.FindAsync(id);
+            var result = await _context.Companies
+            .Include(x => x.Leader)
+            .Include(x => x.Members).FirstOrDefaultAsync(c => c.Id == id);
+            
 
             return result;
         }
@@ -53,16 +56,30 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPatch]
-        public async Task<ActionResult> EditCompany(Company company)
+        [HttpPut]
+        public async Task<ActionResult> EditCompany(Company updatedCompany)
         {
-            var existCompany = await _context.Companies.FindAsync(company.Id);
-            var existLeader = await _context.Users.FindAsync(company.Leader.Id);
+            var existCompany = await _context.Companies
+                .Include(c => c.Members)
+                .FirstOrDefaultAsync(c => c.Id == updatedCompany.Id);
+            
+            if(existCompany == null)
+            {
+                return NotFound();
+            }
 
-            existCompany.Name = company.Name;
-            existCompany.Description = company.Description;
+            var existLeader = await _context.Users.FindAsync(updatedCompany.Leader.Id);
+            var existMembers = new List<User>(){};
+
+            foreach(var member in updatedCompany.Members)
+            {
+                existMembers.Add( _context.Users.Find(member.Id));
+            }
+
+            existCompany.Name = updatedCompany.Name;
+            existCompany.Description = updatedCompany.Description;
             existCompany.Leader = existLeader;
-            existCompany.Members = company.Members;
+            existCompany.Members = existMembers;
 
             await _context.SaveChangesAsync();
             return Ok();
@@ -79,5 +96,3 @@ namespace API.Controllers
         }
     }
 }
-
-//[HttpPost]

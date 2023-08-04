@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j7iUUzMmJZAV1R5ZH2TYExzKNXAQiwMVjatN10Lq0r1LZrKV4+nEG8tU6TG+mdhdYUxrHlk+ImG5QAVxCUAsig==",
+  "dgSpecHash": "vVTOBFD7oOi17ApnP8hk2myZM/oMZ34c4JxjL3KrN4uf/1uQJ+WmPwk7nwYHEJVwf9aBSfJ05l4St00a40TgDQ==",
   "success": true,
-  "projectFilePath": "/home/piotr/Projekty/TeamManagement/Domain/Domain.csproj",
+  "projectFilePath": "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
