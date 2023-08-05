@@ -6,118 +6,53 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using MediatR;
+using Application.Activities;
 
 namespace API.Controllers
 {
     public class ActivityController : BaseController
     {
-        private readonly DataContext _context;
-        public ActivityController(DataContext context)
-        {
-            _context = context;
-
-        }
         [HttpGet]
         public async Task<ActionResult<List<Activity>>> GetActivitiesList()
         {
-            var result = await _context.Activities
-            .Include(x => x.Author)
-            .Include(x => x.Company)
-            .Include(x => x.Group)
-            .Include(x => x.Members).ToListAsync();
-
-            return result;
+            return await Mediator.Send(new List.Query());
         }
 
-        [HttpGet("activitiesForMember/{userId}")]
-        public async Task<ActionResult<List<Activity>>> GetActivitiesForMember(int userId)
+        [HttpGet("activitiesForUser/{userId}")]
+        public async Task<ActionResult<List<Activity>>> GetActivitiesForUser(int userId)
         {
+            return await Mediator.Send(new UserToDo.Query(userId));
+        }
 
-            var user = await _context.Users
-                .Include(u => u.ActivitiesToDo) 
-                    .ThenInclude(a => a.Company)
-                .Include(u => u.ActivitiesToDo) 
-                    .ThenInclude(a => a.Group)
-                .Include(u => u.ActivitiesToDo)
-                    .ThenInclude(a => a.Author)
-                .FirstOrDefaultAsync(u => u.Id == userId);
-
-            if (user == null)
-            {
-                return NotFound(); 
-            }
-            
-            var activitiesForMember = user.ActivitiesToDo.ToList();
-
-            return activitiesForMember;
+        [HttpGet("activitiesByUser/{userId}")]
+        public async Task<ActionResult<List<Activity>>> GetActivitiesByUser(int userId)
+        {
+            return await Mediator.Send(new UserAuthor.Query(userId));
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Activity>> GetActivity(int id)
         {
-            var result = await _context.Activities
-            .Include(x => x.Author)
-            .Include(x => x.Company)
-            .Include(x => x.Group)
-            .Include(x => x.Members).FirstOrDefaultAsync(c => c.Id == id);
-
-            return result;
+            return await Mediator.Send(new Detail.Query(id));
         }
 
         [HttpPost]
         public async Task<ActionResult> CreateActivity(Activity activity)
         {
-            User author = await _context.Users.FindAsync(activity.Author.Id);
-            Company company = await _context.Companies.FindAsync(activity.Company.Id);
-            Group group = await _context.Groups.FindAsync(activity.Group.Id);
-
-            var result = new Activity()
-            {
-                Title = activity.Title,
-                DateStart = activity.DateStart,
-                DateEnd = activity.DateEnd,
-                Description = activity.Description,
-                Company = company,
-                Author = author,
-                Group = group,
-                Members = activity.Members
-            };
-
-            _context.Activities.Add(result);
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            return Ok(await Mediator.Send(new Create.Command{Activity = activity}));
         }
 
         [HttpPatch]
         public async Task<ActionResult> EditActivity(Activity activity)
         {
-            var existActivity = await _context.Activities.FindAsync(activity.Id);
-            var existGroup = await _context.Groups.FindAsync(activity.Group.Id);
-            var existCompany = await _context.Companies.FindAsync(activity.Company.Id);
-            var existAuthor = await _context.Users.FindAsync(activity.Author.Id);
-
-            existActivity.Title = activity.Title;
-            existActivity.DateStart = activity.DateStart;
-            existActivity.DateEnd = activity.DateEnd;
-            existActivity.Description = activity.Description;
-            existActivity.Author = existAuthor;
-            existActivity.Company = existCompany;
-            existActivity.Group = existGroup;
-            existActivity.Members = activity.Members;
-
-            await _context.SaveChangesAsync();
-            return Ok();
+            return Ok(await Mediator.Send(new Edit.Command{Activity = activity}));
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteActivity(int id)
         {
-            var result = await _context.Activities.FindAsync(id);
-            _context.Activities.Remove(result);
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            return Ok(await Mediator.Send(new Delete.Command(id)));
         }
     }
 }
