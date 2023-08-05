@@ -24,7 +24,12 @@ namespace Application.Activities
 
                 User author = await _context.Users.FindAsync(activity.Author.Id);
                 Company company = await _context.Companies.FindAsync(activity.Company.Id);
-                Group group = await _context.Groups.FindAsync(activity.Group.Id);
+                List<User> existUsers = new List<User>() { };
+
+                foreach (var member in activity.Members)
+                {
+                    existUsers.Add(_context.Users.Find(member.Id));
+                }
 
                 var result = new Activity()
                 {
@@ -34,9 +39,14 @@ namespace Application.Activities
                     Description = activity.Description,
                     Company = company,
                     Author = author,
-                    Group = group,
-                    Members = activity.Members
+                    Members = existUsers
                 };
+
+                if (activity.Group != null)
+                {
+                    Group existGroup = await _context.Groups.FindAsync(activity.Group.Id);
+                    result.Group = existGroup;
+                }
 
                 _context.Activities.Add(result);
                 await _context.SaveChangesAsync();

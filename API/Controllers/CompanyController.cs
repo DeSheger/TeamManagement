@@ -42,12 +42,19 @@ namespace API.Controllers
         {
             User leader = await _context.Users.FindAsync(company.Leader.Id);
 
+            var existMembers = new List<User>(){};
+
+            foreach(var member in company.Members)
+            {
+                existMembers.Add( _context.Users.Find(member.Id));
+            }
+
             var result = new Company()
             {
                 Name = company.Name,
                 Description = company.Description,
                 Leader = leader,
-                Members = company.Members
+                Members = existMembers
             };
 
             _context.Companies.Add(result);
