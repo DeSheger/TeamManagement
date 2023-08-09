@@ -26,6 +26,7 @@ namespace Application.Groups
 
                 var ExistGroup = await _context.Groups
                     .Include(g => g.Company)
+                    .Include(g => g.Members)
                     .FirstOrDefaultAsync(g => g.Id == group.Id);
 
                 var ExistCompany = await _context.Companies
@@ -49,10 +50,14 @@ namespace Application.Groups
                         ExistLeader = await _context.Users.FindAsync(group.Leader.Id);
                 }
 
-
+                if(ExistLeader != null)
+                {
+                    ExistGroup.Leader = ExistLeader;
+                } else {
+                    return Unit.Value;
+                }
                 ExistGroup.Name = group.Name;
                 ExistGroup.Description = group.Description;
-                ExistGroup.Leader = ExistLeader;
                 ExistGroup.Members = ExistMembers;
 
                 await _context.SaveChangesAsync();

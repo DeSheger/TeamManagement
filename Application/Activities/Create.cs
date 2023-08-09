@@ -1,5 +1,6 @@
 using Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Activities
@@ -22,13 +23,43 @@ namespace Application.Activities
             {
                 Activity activity = request.Activity;
 
-                User author = await _context.Users.FindAsync(activity.Author.Id);
-                Company company = await _context.Companies.FindAsync(activity.Company.Id);
-                List<User> existUsers = new List<User>() { };
+                Company ExistCompany = await _context.Companies
+                    .Include(c => c.Leader)
+                    .Include(c => c.Members)
+                    .FirstOrDefaultAsync(c => c.Id == activity.Company.Id);
 
-                foreach (var member in activity.Members)
+                List<Group> CompanyGroups = await _context.Groups
+                    .Include(g => g.Company)
+                    .Include(g => g.Leader)
+                    .Where(g => g.Company.Id == ExistCompany.Id)
+                    .ToListAsync();
+
+                Group ExistGroup = null;
+
+                List<User> ExistMembers = new();
+
+                User ExistAuthor = null;
+                
+                // CHECK: IS GROUP IN COMPANY
+                foreach (var CompanyGroup in CompanyGroups)
                 {
-                    existUsers.Add(_context.Users.Find(member.Id));
+                    if (CompanyGroup.Id == activity.Group.Id)
+                        ExistGroup = await _context.Groups
+                        .Include(g => g.Members)
+                        .Include(g => g.Leader)
+                        .FirstOrDefaultAsync(g => g.Id == activity.Group.Id);
+                }
+
+                // CHECK ARE MEMBERS IN GROUP
+                foreach (var GroupMember in ExistGroup.Members)
+                {
+                    foreach(var ActivityMember in activity.Members)
+                    {
+                        if(GroupMember.Id == ActivityMember.Id)
+                            ExistMembers.Add(await _context.Users.FindAsync(ActivityMember.Id));
+                    }
+                    if(GroupMember.Id == activity.Author.Id) // CHECK IS AUTHOR IN GROUP
+                        ExistAuthor = await _context.Users.FindAsync(GroupMember.Id);
                 }
 
                 var result = new Activity()
@@ -37,16 +68,11 @@ namespace Application.Activities
                     DateStart = activity.DateStart,
                     DateEnd = activity.DateEnd,
                     Description = activity.Description,
-                    Company = company,
-                    Author = author,
-                    Members = existUsers
+                    Company = ExistCompany,
+                    Group = ExistGroup,
+                    Author = ExistAuthor,
+                    Members = ExistMembers
                 };
-
-                if (activity.Group != null)
-                {
-                    Group existGroup = await _context.Groups.FindAsync(activity.Group.Id);
-                    result.Group = existGroup;
-                }
 
                 _context.Activities.Add(result);
                 await _context.SaveChangesAsync();

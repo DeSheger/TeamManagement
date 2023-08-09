@@ -25,7 +25,11 @@ namespace Application.Groups
             }
             public async Task<Group> Handle(Query request, CancellationToken cancellationToken)
             {
-                var result = await _context.Groups.FindAsync(request.UserId);
+                var result = await _context.Groups
+                    .Include(g => g.Company)
+                    .Include(g => g.Leader)
+                    .Include(g => g.Members)
+                    .FirstOrDefaultAsync(g => g.Id == request.UserId);
 
                 return result;
             }

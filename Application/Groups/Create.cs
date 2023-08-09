@@ -1,6 +1,7 @@
 using Domain;
 using MediatR;
 using Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Groups
 {
@@ -22,12 +23,14 @@ namespace Application.Groups
             {
                 Group group = request.Group;
 
-                User existLeader = await _context.Users.FindAsync(group.Leader.Id);
-                Company existCompany = await _context.Companies.FindAsync(group.Company.Id);
+                User existLeader = new ();
+                Company existCompany = await _context.Companies
+                    .Include(c => c.Members)
+                    .FirstOrDefaultAsync(c => c.Id == group.Company.Id);
 
                 var existMembers = new List<User>() { };
 
-                // Check: Is Group Member is in Group Comapny?
+                // Check: Is Group Member is in Comapny?
                 foreach (var CompanyMember in existCompany.Members)
                 {
                     foreach(var GroupMember in group.Members)
@@ -35,6 +38,8 @@ namespace Application.Groups
                         if(GroupMember.Id == CompanyMember.Id)
                             existMembers.Add(await _context.Users.FindAsync(GroupMember.Id));
                     }
+                    if(CompanyMember.Id == group.Leader.Id) //CHECK: IS LEADER IN COMPANY MEMBERS?
+                        existLeader = await _context.Users.FindAsync(CompanyMember.Id);
                 }
 
                 var result = new Group()
