@@ -1,3 +1,6 @@
+using Application.DTOs;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -7,25 +10,27 @@ namespace Application.Companies
 {
     public class List
     {
-        public class Query : IRequest<List<Company>>
+        public class Query : IRequest<List<CompanyDTO>>
         {
 
         }
 
-        public class Handler : IRequestHandler<Query, List<Company>>
+        public class Handler : IRequestHandler<Query, List<CompanyDTO>>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IMapper _mapper;
+            public Handler(DataContext context, IMapper mapper)
             {
                 _context = context;
+                _mapper = mapper;
             }
-            public async Task<List<Company>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<CompanyDTO>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var result = await _context.Companies
-                    .Include(x => x.Leader)
-                    .Include(x => x.Members).ToListAsync();
-
-                return result;
+                var CompaniesDTO = await _context.Companies
+                    .ProjectTo<CompanyDTO>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
+                
+                return CompaniesDTO;
             }
         }
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.DTOs;
 using Application.Groups;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace API.Controllers
     public class GroupController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<List<Group>>> GetGroupsList()
+        public async Task<ActionResult<List<GroupDTO>>> GetGroupsList()
         {
             return await Mediator.Send(new List.Query());
         }

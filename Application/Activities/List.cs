@@ -4,6 +4,8 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Application.DTOs;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace Application.Activities
 {
@@ -17,51 +19,21 @@ namespace Application.Activities
         public class Handler : IRequestHandler<Query, List<ActivityDTO>>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IMapper _mapper;
+            public Handler(DataContext context, IMapper mapper)
             {
                 _context = context;
+                _mapper = mapper;
             }
             
             public async Task<List<ActivityDTO>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var result = await _context.Activities
-                    .Include(x => x.Author)
-                    .Include(x => x.Company)
-                    .Include(x => x.Group)
-                    .Include(x => x.Members).ToListAsync();
+                    .ProjectTo<ActivityDTO>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
 
-                var Activities = new List<ActivityDTO>();
-                /*
-                foreach (var activity in result)
-                {
-                    var activityDTO = new ActivityDTO
-                    {
-                        Id = activity.Id,
-                        Title = activity.Title,
-                        DateStart = activity.DateStart,
-                        DateEnd = activity.DateEnd,
-                        Description = activity.Description,
-                        AuthorId = new UserDTO{Name = activity.Author.Name, Surrname = activity.Author.Surrname},
-                        CompanyId = activity.Company,
-                        GroupId = activity.Group,
-                        MembersId = new List<UserDTO>()
-                        
-                    };
-                    foreach(var member in activity.Members)
-                    {
-                        var memberDTO = new UserDTO
-                        {
-                            Name = member.Name,
-                            Surrname = member.Surrname
-                        };
 
-                        activityDTO.MembersId.Add(memberDTO);
-                    }
-
-                    Activities.Add(activityDTO);
-                } */
-
-            return Activities;
+            return result;
             } 
         }
     }
