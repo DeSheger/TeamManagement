@@ -8,13 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using MediatR;
 using Application.Activities;
+using Application.DTOs;
 
 namespace API.Controllers
 {
     public class ActivityController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<List<Activity>>> GetActivitiesList()
+        public async Task<ActionResult<List<ActivityDTO>>> GetActivitiesList()
         {
             return await Mediator.Send(new List.Query());
         }

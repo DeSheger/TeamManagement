@@ -1,3 +1,6 @@
+using Application.DTOs;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,27 +11,37 @@ namespace API.Controllers
     public class UserController : BaseController
     {
         private readonly DataContext _context;
-        public UserController(DataContext context)
+        private readonly IMapper _mapper;
+        public UserController(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetUsersList()
+        public async Task<ActionResult<List<UserDTO>>> GetUsersList()
         {
-            var result = await _context.Users
+            var user = await _context.Users
+                .ProjectTo<UserDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
-            
-            return result;
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<UserDTO>> GetUser(int id)
         {
-            var result = await _context.Users
+            var User = await _context.Users
                 .FindAsync(id);
-            
-            return result;
+
+            var UserDTO = _mapper.Map<UserDTO>(User);
+
+            return UserDTO;
         }
 
         [HttpPost]

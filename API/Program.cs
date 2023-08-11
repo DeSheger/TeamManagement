@@ -5,6 +5,7 @@ using Persistence;
 using Microsoft.Extensions.DependencyInjection;
 using Domain;
 using Microsoft.AspNetCore.Identity;
+using Application.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,8 @@ builder.Services.AddCors(opt => {
     });
 });
 
+                    // Add UserIdentity and Authentication
+
 builder.Services.AddIdentityCore<User>(opt =>
 {
     opt.Password.RequireNonAlphanumeric = false;
@@ -44,6 +47,10 @@ builder.Services.AddAuthentication();
 
 
 builder.Services.AddMediatR(typeof(List.Handler));
+
+                        // Add AutoMapper to DI
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 
