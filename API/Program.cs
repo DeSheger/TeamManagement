@@ -3,6 +3,8 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Microsoft.Extensions.DependencyInjection;
+using Domain;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,15 @@ builder.Services.AddCors(opt => {
     });
 });
 
+builder.Services.AddIdentityCore<User>(opt =>
+{
+    opt.Password.RequireNonAlphanumeric = false;
+
+}).AddEntityFrameworkStores<DataContext>();
+
+builder.Services.AddAuthentication();
+
+
 builder.Services.AddMediatR(typeof(List.Handler));
 
 var app = builder.Build();
@@ -58,8 +69,9 @@ var services = scope.ServiceProvider;
 try
 {
     var context = services.GetRequiredService<DataContext>();
+    var userManager = services.GetService<UserManager<User>>();
     context.Database.Migrate();
-    await Seed.SeedData(context);
+    await Seed.SeedData(context, userManager);
 }
 catch (Exception ex)
 {

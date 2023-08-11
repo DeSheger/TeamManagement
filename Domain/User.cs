@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Domain
 {
-    public class User
+    public class User : IdentityUser<int>
     {
-        [Key]
-        public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string Surrname { get; set; } = null!;
+        public string? Bio { get; set; } = null;
         [JsonIgnore]
         public ICollection<Activity>? ActivitiesAuthor {get; set;} = new List<Activity>();
         [JsonIgnore]

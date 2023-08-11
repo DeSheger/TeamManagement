@@ -1,36 +1,42 @@
 {
   "format": 1,
   "restore": {
-    "/home/piotr/Projekty/TeamManagement/Application/Application.csproj": {}
+    "D:\\Projects\\TeamManagement\\Application\\Application.csproj": {}
   },
   "projects": {
-    "/home/piotr/Projekty/TeamManagement/Application/Application.csproj": {
+    "D:\\Projects\\TeamManagement\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/piotr/Projekty/TeamManagement/Application/Application.csproj",
+        "projectUniqueName": "D:\\Projects\\TeamManagement\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "/home/piotr/Projekty/TeamManagement/Application/Application.csproj",
-        "packagesPath": "/home/piotr/.nuget/packages/",
-        "outputPath": "/home/piotr/Projekty/TeamManagement/Application/obj/",
+        "projectPath": "D:\\Projects\\TeamManagement\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\TeamManagement\\Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/piotr/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\pgste\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/home/piotr/Projekty/TeamManagement/Domain/Domain.csproj": {
-                "projectPath": "/home/piotr/Projekty/TeamManagement/Domain/Domain.csproj"
+              "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj"
               },
-              "/home/piotr/Projekty/TeamManagement/Persistence/Persistence.csproj": {
-                "projectPath": "/home/piotr/Projekty/TeamManagement/Persistence/Persistence.csproj"
+              "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
+                "projectPath": "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj"
               }
             }
           }
@@ -66,26 +72,32 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.110/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/piotr/Projekty/TeamManagement/Domain/Domain.csproj": {
+    "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/piotr/Projekty/TeamManagement/Domain/Domain.csproj",
+        "projectUniqueName": "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "/home/piotr/Projekty/TeamManagement/Domain/Domain.csproj",
-        "packagesPath": "/home/piotr/.nuget/packages/",
-        "outputPath": "/home/piotr/Projekty/TeamManagement/Domain/obj/",
+        "projectPath": "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\TeamManagement\\Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/piotr/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\pgste\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -103,6 +115,12 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -119,34 +137,40 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.110/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/piotr/Projekty/TeamManagement/Persistence/Persistence.csproj": {
+    "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/piotr/Projekty/TeamManagement/Persistence/Persistence.csproj",
+        "projectUniqueName": "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
         "projectName": "Persistence",
-        "projectPath": "/home/piotr/Projekty/TeamManagement/Persistence/Persistence.csproj",
-        "packagesPath": "/home/piotr/.nuget/packages/",
-        "outputPath": "/home/piotr/Projekty/TeamManagement/Persistence/obj/",
+        "projectPath": "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
+        "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\TeamManagement\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/piotr/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\pgste\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/home/piotr/Projekty/TeamManagement/Domain/Domain.csproj": {
-                "projectPath": "/home/piotr/Projekty/TeamManagement/Domain/Domain.csproj"
+              "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj"
               }
             }
           }
@@ -182,7 +206,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.110/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

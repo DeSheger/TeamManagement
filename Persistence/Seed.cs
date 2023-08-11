@@ -3,44 +3,51 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<User> userManager)
         {
             //Add users
-            if(context.Users.Any()) return;
-
-            var users = new List<User>
+            if (!userManager.Users.Any())
             {
-                new User() 
-                { 
+                var users = new List<User>
+                {
+                new User()
+                {
                     Id = 1,
                     Name = "Piotr",
                     Surrname = "Kowalski"
                 },
-                new User() 
-                { 
+                new User()
+                {
                     Id = 2,
                     Name = "Rafal",
                     Surrname = "Kowalski"
                 },
-                new User() 
-                { 
+                new User()
+                {
                     Id = 3,
                     Name = "Wiktor",
                     Surrname = "Nowak"
                 }
-            };
-            
-            await context.Users.AddRangeAsync(users);
-            await context.SaveChangesAsync();
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+
+                await context.Users.AddRangeAsync(users);
+                await context.SaveChangesAsync();
+            }
 
 
             //Add companies
-            if(context.Companies.Any()) return;
+            if (context.Companies.Any()) return;
 
             var user1 = await context.Users.FindAsync(1);
             var user2 = await context.Users.FindAsync(2);
@@ -60,16 +67,16 @@ namespace Persistence
 
             var companies = new List<Company>
             {
-                new Company() 
-                { 
+                new Company()
+                {
                     Id = 1,
                     Name = "Asus",
                     Description = "Hardware",
                     Leader = user1,
                     Members = userGroup1
                 },
-                new Company() 
-                { 
+                new Company()
+                {
                     Id = 2,
                     Name = "Lockhead Martin",
                     Description = "Military",
@@ -80,17 +87,17 @@ namespace Persistence
 
             await context.Companies.AddRangeAsync(companies);
             await context.SaveChangesAsync();
-            
+
             //Add Groups
-            if(context.Groups.Any()) return;
+            if (context.Groups.Any()) return;
 
             var company1 = await context.Companies.FindAsync(1);
             var company2 = await context.Companies.FindAsync(2);
 
             var groups = new List<Group>
             {
-                new Group() 
-                { 
+                new Group()
+                {
                     Id = 1,
                     Name = "Backend",
                     Description = "Backend dev",
@@ -99,8 +106,8 @@ namespace Persistence
                     Members = userGroup2
 
                 },
-                new Group() 
-                { 
+                new Group()
+                {
                     Id = 2,
                     Name = "Frontend",
                     Description = "Frontend dev",
@@ -108,8 +115,8 @@ namespace Persistence
                     Company = company1,
                     Members = userGroup3
                 },
-                new Group() 
-                { 
+                new Group()
+                {
                     Id = 3,
                     Name = "Soldiers",
                     Description = "Soldiers Group",
@@ -122,9 +129,9 @@ namespace Persistence
 
             await context.Groups.AddRangeAsync(groups);
             await context.SaveChangesAsync();
-            
+
             //Add activities
-            if(context.Activities.Any()) return;
+            if (context.Activities.Any()) return;
 
             var group1 = await context.Groups.FindAsync(1);
             var group2 = await context.Groups.FindAsync(2);
@@ -132,8 +139,8 @@ namespace Persistence
 
             var activities = new List<Activity>
             {
-                new Activity() 
-                { 
+                new Activity()
+                {
                     Title = "Login screen",
                     Description = "New login screen view",
                     DateStart = DateTime.Now,
@@ -143,8 +150,8 @@ namespace Persistence
                     Group = group2,
                     Members = userGroup2,
                 },
-                new Activity() 
-                { 
+                new Activity()
+                {
                     Title = "Home screen",
                     Description = "New home screen view",
                     DateStart = DateTime.Now,
@@ -154,8 +161,8 @@ namespace Persistence
                     Group = group2,
                     Members = userGroup3,
                 },
-                new Activity() 
-                { 
+                new Activity()
+                {
                     Title = "Sahara exploration",
                     Description = "Explore south of Sahara",
                     DateStart = DateTime.Now,
@@ -165,8 +172,8 @@ namespace Persistence
                     Group = group3,
                     Members = userGroup3,
                 },
-                new Activity() 
-                { 
+                new Activity()
+                {
                     Title = "UsersController",
                     Description = "Add methods in UserController",
                     DateStart = DateTime.Now,
