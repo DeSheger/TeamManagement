@@ -39,7 +39,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateActivity(Activity activity)
+        public async Task<ActionResult> CreateActivity(ActivityDTO activity)
         {
             return Ok(await Mediator.Send(new Create.Command{Activity = activity}));
         }

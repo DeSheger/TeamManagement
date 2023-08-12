@@ -11,10 +11,10 @@ namespace Application.Groups
     {
         public class Query : IRequest<GroupDTO>
         {
-            public readonly int UserId;
+            public readonly int GroupId;
             public Query(int Id)
             {
-                UserId = Id;
+                GroupId = Id;
             }
         }
 
@@ -30,7 +30,10 @@ namespace Application.Groups
             public async Task<GroupDTO> Handle(Query request, CancellationToken cancellationToken)
             {
                 var result = await _context.Groups
-                    .FindAsync(request.UserId);
+                    .Include(x => x.Leader)
+                    .Include(x => x.Company)
+                    .Include(x => x.Members)
+                    .FirstOrDefaultAsync(x => x.Id == request.GroupId);
 
                 var resultDTO = _mapper.Map<GroupDTO>(result);
 

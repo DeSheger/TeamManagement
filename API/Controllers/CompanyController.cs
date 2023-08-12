@@ -27,9 +27,9 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateCompany(Company company)
+        public async Task<ActionResult> CreateCompany(CompanyDTO company)
         {
-            return Ok(await Mediator.Send(new Create.Command{Company = company}));
+            return Ok(await Mediator.Send(new Create.Command{CompanyDTO = company}));
         }
 
         [HttpPatch]

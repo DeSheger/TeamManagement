@@ -26,7 +26,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateGroup(Group group)
+        public async Task<ActionResult> CreateGroup(GroupDTO group)
         {
             return Ok(await Mediator.Send(new Create.Command{Group = group}));
         }

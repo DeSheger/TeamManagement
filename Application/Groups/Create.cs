@@ -2,6 +2,8 @@ using Domain;
 using MediatR;
 using Persistence;
 using Microsoft.EntityFrameworkCore;
+using Application.DTOs;
+using AutoMapper;
 
 namespace Application.Groups
 {
@@ -9,19 +11,21 @@ namespace Application.Groups
     {
         public class Command : IRequest
         {
-            public Group Group;
+            public GroupDTO Group;
         }
 
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IMapper _mapper;
+            public Handler(DataContext context, IMapper mapper)
             {
                 _context = context;
+                _mapper = mapper;
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                Group group = request.Group;
+                Group group = _mapper.Map<Group>(request.Group);
 
                 User existLeader = new ();
                 Company existCompany = await _context.Companies

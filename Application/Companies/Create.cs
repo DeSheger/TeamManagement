@@ -1,3 +1,5 @@
+using Application.DTOs;
+using AutoMapper;
 using Domain;
 using MediatR;
 using Persistence;
@@ -8,20 +10,22 @@ namespace Application.Companies
     {
         public class Command : IRequest
         {
-            public Company Company;
+            public CompanyDTO CompanyDTO;
         }
 
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IMapper _mapper;
+            public Handler(DataContext context, IMapper mapper)
             {
                 _context = context;
+                _mapper = mapper;
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                Company company = request.Company;
-
+                Company company = _mapper.Map<Company>(request.CompanyDTO);
+                
                 User leader = await _context.Users.FindAsync(company.Leader.Id);
 
                 var existMembers = new List<User>() { };
@@ -38,10 +42,10 @@ namespace Application.Companies
                     Leader = leader,
                     Members = existMembers
                 };
-
+                
                 _context.Companies.Add(result);
                 await _context.SaveChangesAsync();
-
+                
                 return Unit.Value;
             }
         }

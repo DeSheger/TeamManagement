@@ -30,9 +30,11 @@ namespace Application.Companies
             public async Task<CompanyDTO> Handle(Query request, CancellationToken cancellationToken)
             {
                 var result = await _context.Companies
-                    .FindAsync(request.UserId);
+                    .Include(x => x.Leader)
+                    .Include(x => x.Members)
+                    .FirstOrDefaultAsync(x => x.Id == request.UserId);
                 
-                var resultDTO = _mapper.Map<CompanyDTO>(result);
+                var resultDTO = _mapper.Map<Company,CompanyDTO>(result);
 
                 return resultDTO;
             }

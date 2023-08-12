@@ -12,10 +12,10 @@ namespace Application.Activities
     {
         public class Query : IRequest<ActivityDTO>
         {
-            public readonly int UserId;
+            public readonly int ActivityId;
             public Query(int Id)
             {
-                UserId = Id;
+                ActivityId = Id;
             }
         }
 
@@ -31,7 +31,11 @@ namespace Application.Activities
             public async Task<ActivityDTO> Handle(Query request, CancellationToken cancellationToken)
             {
                 var result = await _context.Activities
-                    .FindAsync(request.UserId);
+                    .Include(x => x.Author)
+                    .Include(x => x.Company)
+                    .Include(x => x.Group)
+                    .Include(x => x.Members)
+                    .FirstOrDefaultAsync(x => x.Id == request.ActivityId);
                 
                 var resultDTO = _mapper.Map<ActivityDTO>(result);
 
