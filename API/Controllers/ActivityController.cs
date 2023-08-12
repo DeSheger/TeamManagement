@@ -45,7 +45,7 @@ namespace API.Controllers
         }
 
         [HttpPatch]
-        public async Task<ActionResult> EditActivity(Activity activity)
+        public async Task<ActionResult> EditActivity(ActivityDTO activity)
         {
             return Ok(await Mediator.Send(new Edit.Command{Activity = activity}));
         }

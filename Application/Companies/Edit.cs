@@ -1,3 +1,4 @@
+using Application.DTOs;
 using AutoMapper;
 using Domain;
 using MediatR;
@@ -10,7 +11,7 @@ namespace Application.Companies
     {
         public class Command : IRequest
         {
-            public Company EditedCompany;
+            public CompanyDTO EditedCompany;
         }
 
         public class Handler : IRequestHandler<Command>
@@ -25,7 +26,7 @@ namespace Application.Companies
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                Company updatedCompany = request.EditedCompany;
+                Company updatedCompany = _mapper.Map<Company>(request.EditedCompany);
 
                 var existCompany = await _context.Companies
                .Include(c => c.Members)

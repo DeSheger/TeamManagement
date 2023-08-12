@@ -33,7 +33,7 @@ namespace API.Controllers
         }
 
         [HttpPatch]
-        public async Task<ActionResult> EditCompany(Company updatedCompany)
+        public async Task<ActionResult> EditCompany(CompanyDTO updatedCompany)
         {
             return Ok(await Mediator.Send(new Edit.Command{EditedCompany = updatedCompany}));
         }

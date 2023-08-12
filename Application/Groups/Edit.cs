@@ -1,3 +1,5 @@
+using Application.DTOs;
+using AutoMapper;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -9,20 +11,22 @@ namespace Application.Groups
     {
         public class Command : IRequest
         {
-            public Group EditedGroup;
+            public GroupDTO EditedGroup;
         }
 
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IMapper _mapper;
+            public Handler(DataContext context, IMapper mapper)
             {
                 _context = context;
+                _mapper = mapper;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                Group group = request.EditedGroup;
+                Group group = _mapper.Map<Group>(request.EditedGroup);
 
                 var ExistGroup = await _context.Groups
                     .Include(g => g.Company)

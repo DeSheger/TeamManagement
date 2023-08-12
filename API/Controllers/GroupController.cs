@@ -32,7 +32,7 @@ namespace API.Controllers
         }
 
         [HttpPatch]
-        public async Task<ActionResult> EditGroup(Group group)
+        public async Task<ActionResult> EditGroup(GroupDTO group)
         {
             return Ok(await Mediator.Send(new Edit.Command{EditedGroup = group}));
         }
