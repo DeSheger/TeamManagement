@@ -21,7 +21,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Company>> GetCompany(int id)
+        public async Task<ActionResult<CompanyDTO>> GetCompany(int id)
         {
             return await Mediator.Send(new Detail.Query(id));
         }

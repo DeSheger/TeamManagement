@@ -1,3 +1,5 @@
+using Application.DTOs;
+using AutoMapper;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +9,7 @@ namespace Application.Groups
 {
     public class Detail
     {
-        public class Query : IRequest<Group>
+        public class Query : IRequest<GroupDTO>
         {
             public readonly int UserId;
             public Query(int Id)
@@ -16,22 +18,23 @@ namespace Application.Groups
             }
         }
 
-        public class Handler : IRequestHandler<Query, Group>
+        public class Handler : IRequestHandler<Query, GroupDTO>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IMapper _mapper;
+            public Handler(DataContext context, IMapper mapper)
             {
                 _context = context;
+                _mapper = mapper;
             }
-            public async Task<Group> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<GroupDTO> Handle(Query request, CancellationToken cancellationToken)
             {
                 var result = await _context.Groups
-                    .Include(g => g.Company)
-                    .Include(g => g.Leader)
-                    .Include(g => g.Members)
-                    .FirstOrDefaultAsync(g => g.Id == request.UserId);
+                    .FindAsync(request.UserId);
 
-                return result;
+                var resultDTO = _mapper.Map<GroupDTO>(result);
+
+                return resultDTO;
             }
         }
     }

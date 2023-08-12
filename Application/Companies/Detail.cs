@@ -1,3 +1,5 @@
+using Application.DTOs;
+using AutoMapper;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +9,7 @@ namespace Application.Companies
 {
     public class Detail
     {
-        public class Query : IRequest<Company>
+        public class Query : IRequest<CompanyDTO>
         {
             public readonly int UserId;
             public Query(int Id)
@@ -16,20 +18,23 @@ namespace Application.Companies
             }
         }
 
-        public class Handler : IRequestHandler<Query, Company>
+        public class Handler : IRequestHandler<Query, CompanyDTO>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IMapper _mapper;
+            public Handler(DataContext context, IMapper mapper)
             {
                 _context = context;
+                _mapper = mapper;
             }
-            public async Task<Company> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<CompanyDTO> Handle(Query request, CancellationToken cancellationToken)
             {
                 var result = await _context.Companies
-                    .Include(x => x.Leader)
-                    .Include(x => x.Members).FirstOrDefaultAsync(c => c.Id == request.UserId);
+                    .FindAsync(request.UserId);
+                
+                var resultDTO = _mapper.Map<CompanyDTO>(result);
 
-                return result;
+                return resultDTO;
             }
         }
     }

@@ -33,7 +33,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Activity>> GetActivity(int id)
+        public async Task<ActionResult<ActivityDTO>> GetActivity(int id)
         {
             return await Mediator.Send(new Detail.Query(id));
         }

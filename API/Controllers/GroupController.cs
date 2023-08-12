@@ -20,7 +20,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Group>> GetGroup(int id)
+        public async Task<ActionResult<GroupDTO>> GetGroup(int id)
         {
             return await Mediator.Send(new Detail.Query(id));
         }
