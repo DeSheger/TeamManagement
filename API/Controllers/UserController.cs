@@ -2,6 +2,7 @@ using Application.DTOs;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -12,10 +13,50 @@ namespace API.Controllers
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        public UserController(DataContext context, IMapper mapper)
+        private readonly UserManager<User> _userManager;
+        public UserController(DataContext context, IMapper mapper, UserManager<User> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<SessionDTO>> Login(LoginDTO user)
+        {
+            var LoggedUser = await _userManager.FindByEmailAsync(user.Email);
+
+            if (LoggedUser == null)
+            {
+                return Unauthorized();
+            }
+            var result = await _userManager.CheckPasswordAsync(LoggedUser, user.Password);
+
+            if(result)
+            {
+                SessionDTO Session = _mapper.Map<SessionDTO>(LoggedUser);
+
+                return Session;
+
+            } else return Unauthorized();
+        }
+
+        [HttpPost("register")]
+        public async Task<ActionResult> CreateUser(RegisterDTO user)
+        {
+            User NewUser = new ()
+            {
+                Name = user.Name,
+                Surrname = user.Surrname,
+                Email = user.Email
+            };
+
+            await _userManager.CreateAsync(NewUser, user.Password);
+
+            await _context.Users.AddAsync(NewUser);
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
         [HttpGet]
@@ -42,21 +83,6 @@ namespace API.Controllers
             var UserDTO = _mapper.Map<UserDTO>(User);
 
             return UserDTO;
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> CreateUser(User user)
-        {
-            var newUser = new User()
-            {
-                Name = user.Name,
-                Surrname = user.Surrname,
-            };
-
-            await _context.Users.AddAsync(newUser);
-            await _context.SaveChangesAsync();
-
-            return Ok();
         }
 
         [HttpPatch]

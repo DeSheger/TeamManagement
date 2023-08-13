@@ -20,19 +20,21 @@ namespace Persistence
                 {
                     Id = 1,
                     Name = "Piotr",
-                    Surrname = "Kowalski"
+                    Surrname = "Kowalski",
+                    Email = "piotr@test.com"
                 },
                 new User()
                 {
                     Id = 2,
                     Name = "Rafal",
-                    Surrname = "Kowalski"
+                    Surrname = "rafal@test.com"
                 },
                 new User()
                 {
                     Id = 3,
                     Name = "Wiktor",
-                    Surrname = "Nowak"
+                    Surrname = "Nowak",
+                    Email = "wiktor@test.com"
                 }
                 };
 
