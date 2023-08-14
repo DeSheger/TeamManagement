@@ -27,7 +27,8 @@ namespace Persistence
                 {
                     Id = 2,
                     Name = "Rafal",
-                    Surrname = "rafal@test.com"
+                    Surrname = "Kowalski",
+                    Email = "rafal@test.com"
                 },
                 new User()
                 {

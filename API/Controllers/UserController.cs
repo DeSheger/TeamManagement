@@ -24,7 +24,9 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<SessionDTO>> Login(LoginDTO user)
         {
-            var LoggedUser = await _userManager.FindByEmailAsync(user.Email);
+            var LoggedUser = await _userManager.Users
+            .Where(x => x.Email == user.Email)
+            .FirstOrDefaultAsync();
 
             if (LoggedUser == null)
             {
@@ -86,12 +88,15 @@ namespace API.Controllers
         }
 
         [HttpPatch]
-        public async Task<ActionResult> EditUser(User user)
+        public async Task<ActionResult> EditUser(RegisterDTO user)
         {
-            var editedUser = await _context.Users.FindAsync(user.Id);
+            var EditUser = await _userManager.FindByIdAsync(user.Id.ToString());
+            EditUser.Name = user.Name;
+            EditUser.Email = user.Email;
+            EditUser.Surrname = user.Surrname;
 
-            editedUser.Name = user.Name;
-            editedUser.Surrname = user.Surrname;
+            var token = await _userManager.GeneratePasswordResetTokenAsync(EditUser);
+            var result = await _userManager.ResetPasswordAsync(EditUser, token, user.Password);
 
             await _context.SaveChangesAsync();
 
