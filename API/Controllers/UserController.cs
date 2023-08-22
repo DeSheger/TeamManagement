@@ -90,13 +90,10 @@ namespace API.Controllers
         [HttpPatch]
         public async Task<ActionResult> EditUser(RegisterDTO user)
         {
-            var EditUser = await _userManager.FindByIdAsync(user.Id.ToString());
+            var EditUser = await _context.Users.FindAsync(user.Id);
             EditUser.Name = user.Name;
             EditUser.Email = user.Email;
             EditUser.Surrname = user.Surrname;
-
-            var token = await _userManager.GeneratePasswordResetTokenAsync(EditUser);
-            var result = await _userManager.ResetPasswordAsync(EditUser, token, user.Password);
 
             await _context.SaveChangesAsync();
 
