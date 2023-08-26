@@ -1,4 +1,6 @@
 import React, { ReactNode } from "react";
+import { Container, Row } from "react-bootstrap";
+import Menu from "../components/Menu";
 
 interface ILayout
 {
@@ -8,11 +10,15 @@ interface ILayout
 const Layout: React.FC<ILayout> = ({children}) => {
 
     return (
-        <div className="layout">
-            <div className="layout__main">
+        <Container fluid>
+            <Row>
+                <Menu />
+            </Row>
+
+            <Row>
                 {children}
-            </div>
-        </div>
+            </Row>
+        </Container>
     );
 }
 

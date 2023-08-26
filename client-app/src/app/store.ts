@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import navigatorReducer from '../features/navigator/navigatorSlice';
+import themeReducer from '../features/theme/themeSlice';
 
 export const store = configureStore({
   reducer: {
     navigator: navigatorReducer,
+    theme: themeReducer
   },
 })
 
