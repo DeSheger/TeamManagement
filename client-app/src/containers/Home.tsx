@@ -1,13 +1,13 @@
 import React from 'react';
 import Layout from './Layout';
 
-const Start = () => {
+const Home = () => {
 
     return (
         <>
-            Start
+            Home
         </>
     );
 }
 
-export default Start
+export default Home

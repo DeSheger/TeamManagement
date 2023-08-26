@@ -1,13 +1,13 @@
 import React from 'react';
 import Layout from './Layout';
 
-const Start = () => {
+const Docs = () => {
 
     return (
         <>
-            Start
+            Docs
         </>
     );
 }
 
-export default Start
+export default Docs

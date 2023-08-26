@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Projects\\TeamManagement\\API\\API.csproj": {}
+    "E:\\Projects\\TeamManagement\\API\\API.csproj": {}
   },
   "projects": {
-    "d:\\Projects\\TeamManagement\\API\\API.csproj": {
+    "E:\\Projects\\TeamManagement\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Projects\\TeamManagement\\API\\API.csproj",
+        "projectUniqueName": "E:\\Projects\\TeamManagement\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "d:\\Projects\\TeamManagement\\API\\API.csproj",
+        "projectPath": "E:\\Projects\\TeamManagement\\API\\API.csproj",
         "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
-        "outputPath": "d:\\Projects\\TeamManagement\\API\\obj\\",
+        "outputPath": "E:\\Projects\\TeamManagement\\API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\pgste\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,15 +22,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "d:\\Projects\\TeamManagement\\Application\\Application.csproj": {
-                "projectPath": "d:\\Projects\\TeamManagement\\Application\\Application.csproj"
+              "E:\\Projects\\TeamManagement\\Application\\Application.csproj": {
+                "projectPath": "E:\\Projects\\TeamManagement\\Application\\Application.csproj"
               }
             }
           }
@@ -87,25 +82,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "d:\\Projects\\TeamManagement\\Application\\Application.csproj": {
+    "E:\\Projects\\TeamManagement\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Projects\\TeamManagement\\Application\\Application.csproj",
+        "projectUniqueName": "E:\\Projects\\TeamManagement\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "d:\\Projects\\TeamManagement\\Application\\Application.csproj",
+        "projectPath": "E:\\Projects\\TeamManagement\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
-        "outputPath": "d:\\Projects\\TeamManagement\\Application\\obj\\",
+        "outputPath": "E:\\Projects\\TeamManagement\\Application\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\pgste\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -119,11 +110,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
-                "projectPath": "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj"
+              "E:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\Projects\\TeamManagement\\Domain\\Domain.csproj"
               },
-              "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
-                "projectPath": "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj"
+              "E:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
+                "projectPath": "E:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj"
               }
             }
           }
@@ -163,25 +154,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
+    "E:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
+        "projectUniqueName": "E:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
+        "projectPath": "E:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
-        "outputPath": "d:\\Projects\\TeamManagement\\Domain\\obj\\",
+        "outputPath": "E:\\Projects\\TeamManagement\\Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\pgste\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -228,25 +215,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
+    "E:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
+        "projectUniqueName": "E:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
         "projectName": "Persistence",
-        "projectPath": "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
+        "projectPath": "E:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
         "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
-        "outputPath": "d:\\Projects\\TeamManagement\\Persistence\\obj\\",
+        "outputPath": "E:\\Projects\\TeamManagement\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\pgste\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -260,8 +243,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
-                "projectPath": "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj"
+              "E:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\Projects\\TeamManagement\\Domain\\Domain.csproj"
               }
             }
           }
@@ -297,7 +280,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

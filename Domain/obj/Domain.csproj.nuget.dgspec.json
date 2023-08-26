@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {}
+    "E:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
+    "E:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
+        "projectUniqueName": "E:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
+        "projectPath": "E:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
-        "outputPath": "d:\\Projects\\TeamManagement\\Domain\\obj\\",
+        "outputPath": "E:\\Projects\\TeamManagement\\Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\pgste\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -65,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

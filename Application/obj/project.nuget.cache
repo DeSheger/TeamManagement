@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "U8OOqNDc3JGgl9+vdF72l4c1TfumbzAqvCjCH15TncTktSLvI1Jngc9hLPoYEHoFHDUo0Wliz+7ea57gVZy1kw==",
+  "dgSpecHash": "xUskYk39CaLN/cZIJxXxKMxOkLA0eYFMpqnTaRw7FG2CijWyN2J85tvcpfLdEXtdC8+cHmEv9YoQR8uroN1Q2A==",
   "success": true,
-  "projectFilePath": "d:\\Projects\\TeamManagement\\Application\\Application.csproj",
+  "projectFilePath": "E:\\Projects\\TeamManagement\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pgste\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\pgste\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
