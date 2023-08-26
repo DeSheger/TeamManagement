@@ -32,47 +32,29 @@ const initialState: NavigatorState = {
     users: false,
 }
 
-const iteration = (containerName: string, state: object) => {
-    for(let [key,value] of Object.entries(state))
-    {
-        if(key == containerName)
-            value = true;
-        else
-            value = false;
-    };
-};
+const iteration = (containerName: string, state: any) => {
+    const newState = { ...state }; // Tworzymy kopię stanu
+
+    for (let [key, value] of Object.entries(newState)) {
+        newState[key] = containerName === key; // Aktualizujemy właściwość w nowym stanie
+    }
+
+    return newState; // Zwracamy zaktualizowany stan
+}
 
 const navigatorSlice = createSlice({
     name: 'navigator',
     initialState,
     reducers: {
-        start: (state) => {
-            iteration("start", state)
-        },
-        home: (state) => {
-            iteration("home", state)
-        },
-        login: (state) => {
-            iteration("login", state)
-        },
-        docs: (state) => {
-            iteration("docs", state)
-        },
-        profile: (state) => {
-            iteration("profile", state)
-        },
-        activities: (state) => {
-            iteration("activities", state)
-        },
-        companies: (state) => {
-            iteration("companies", state)
-        },
-        groups: (state) => {
-            iteration("groups", state)
-        },
-        users: (state) => {
-            iteration("users", state)
-        },
+        start: (state) => iteration("start", state),
+        home: (state) => iteration("home", state),
+        login: (state) => iteration("login", state),
+        docs: (state) => iteration("docs", state),
+        profile: (state) => iteration("profile", state),
+        activities: (state) => iteration("activities", state),
+        companies: (state) => iteration("companies", state),
+        groups: (state) => iteration("groups", state),
+        users: (state) => iteration("users", state),
     }
 });
 
