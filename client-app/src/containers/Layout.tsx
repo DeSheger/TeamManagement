@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import { Container, Row } from "react-bootstrap";
 import Menu from "../components/Menu";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
 
 interface ILayout
 {
@@ -8,7 +10,7 @@ interface ILayout
 }
 
 const Layout: React.FC<ILayout> = ({children}) => {
-
+    const {theme} = useSelector((state: RootState) => state.theme)
     return (
         <Container fluid>
             <Row>
@@ -16,7 +18,9 @@ const Layout: React.FC<ILayout> = ({children}) => {
             </Row>
 
             <Row>
-                {children}
+                <Container className={`bg-${theme}`} fluid style={{minHeight: "100vh"}}>
+                    {children}
+                </Container>
             </Row>
         </Container>
     );

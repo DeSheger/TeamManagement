@@ -1,0 +1,49 @@
+.start {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__companySection {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+        min-height: 100vh;
+    }
+
+    &__groupSection {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+        min-height: 100vh;
+    }
+
+    &__activitySection {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+        min-height: 100vh;
+    }
+
+    &__paragraph {
+        display: none;
+        width: 50% !important;
+        padding: 0 50px;
+
+        @media (min-width:500px) {
+            display: block;
+        }
+    }
+
+
+}
+.card {
+    width: 100%;
+
+    @media (min-width:500px) {
+        width: 50%;
+    }
+}

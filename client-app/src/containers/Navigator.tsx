@@ -6,12 +6,13 @@ import Docs from "./Docs";
 
 const Navigator = () => {
     const navigator = useSelector((state: RootState) => state.navigator)
+    const {theme} = useSelector((state: RootState) => state.theme)
 
     return (
         <>
-            {navigator.start ? <Start /> : null}
-            {navigator.home ? <Home /> : null}
-            {navigator.docs ? <Docs /> : null}
+            {navigator.start ? <Start theme={theme}/> : null}
+            {navigator.home ? <Home theme={theme}/> : null}
+            {navigator.docs ? <Docs theme={theme}/> : null}
         </>
     );
 };
