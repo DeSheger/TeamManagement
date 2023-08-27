@@ -51,10 +51,39 @@
   }
 }
 
+.authentication {
+  display: flex;
+  width: 100%;
+  min-height: 80vh;
+  justify-content: center;
+  align-items: center;
+}
+.authentication__form {
+  display: flex;
+  width: 100%;
+}
+@media (min-width: 600px) {
+  .authentication__form {
+    width: 600px;
+  }
+}
+
 .text_light {
   color: black;
 }
 
 .text_dark {
   color: white;
+}
+
+.form-dark {
+  background-color: #212529;
+  color: #f8f9fa;
+  width: 100%;
+}
+
+.form-light {
+  background-color: #f8f9fa;
+  color: black;
+  width: 100%;
 }/*# sourceMappingURL=main.css.map */

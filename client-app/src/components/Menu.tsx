@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { start, home, docs } from "../features/navigator/navigatorSlice";
+import { start, home, docs, login } from "../features/navigator/navigatorSlice";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -28,8 +28,8 @@ const Menu = () => {
                 </Nav>
                 <Nav>
                     <Button variant={theme} onClick={() => themeHandler(theme,dispatch)}>Theme: {theme}</Button>
-                    <Nav.Link>Log In</Nav.Link>
-                    <Nav.Link>Sign In</Nav.Link>
+                    <Nav.Link onClick={() => dispatch(login())}>Log In</Nav.Link>
+                    <Nav.Link onClick={() => dispatch(login())}>Sign In</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>
