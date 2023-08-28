@@ -5,7 +5,7 @@ export interface SessionState {
     email: string,
     name: string,
     surrname: string,
-    token: string
+    token: any
 };
 
 const initialState:SessionState = {
@@ -16,7 +16,7 @@ const initialState:SessionState = {
 };
 
 export const sessionSlice = createSlice({
-    name: 'counter',
+    name: 'session',
     initialState,
     reducers: {
       session: (state, action: PayloadAction<SessionState>) => {
