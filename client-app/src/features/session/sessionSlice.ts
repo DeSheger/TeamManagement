@@ -20,7 +20,7 @@ export const sessionSlice = createSlice({
     initialState,
     reducers: {
       session: (state, action: PayloadAction<SessionState>) => {
-        state = action.payload
+        return {...state, ...action.payload}
       },
     },
   })

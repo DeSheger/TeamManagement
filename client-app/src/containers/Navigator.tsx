@@ -4,18 +4,18 @@ import { RootState } from "../app/store";
 import Home from "./Home";
 import Docs from "./Docs";
 import Authentication from "./Authentication";
+import { Route, Routes } from 'react-router-dom';
 
 const Navigator = () => {
-    const navigator = useSelector((state: RootState) => state.navigator)
-    const {theme} = useSelector((state: RootState) => state.theme)
+    const { theme } = useSelector((state: RootState) => state.theme)
 
     return (
-        <>
-            {navigator.start ? <Start theme={theme}/> : null}
-            {navigator.home ? <Home theme={theme}/> : null}
-            {navigator.docs ? <Docs theme={theme}/> : null}
-            {navigator.login ? <Authentication theme={theme}/> : null}
-        </>
+        <Routes>
+            <Route path="/" element={<Start theme={theme} />}></Route>
+            <Route path="/home" element={<Home theme={theme} />}></Route>
+            <Route path="/docs" element={<Docs theme={theme} />}></Route>
+            <Route path="/authentication" element={<Authentication theme={theme} />}></Route>
+        </Routes>
     );
 };
 

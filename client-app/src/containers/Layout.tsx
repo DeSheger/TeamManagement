@@ -18,7 +18,7 @@ const Layout: React.FC<ILayout> = ({children}) => {
             </Row>
 
             <Row>
-                <Container className={`bg-${theme}`} fluid style={{minHeight: "100vh"}}>
+                <Container className={`bg-${theme} text_${theme}`} fluid style={{minHeight: "100vh"}}>
                     {children}
                 </Container>
             </Row>

@@ -68,6 +68,16 @@
   }
 }
 
+.menu {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.menu a {
+  text-decoration: none;
+  padding: 0 10px;
+}
+
 .text_light {
   color: black;
 }

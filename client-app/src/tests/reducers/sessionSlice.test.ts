@@ -1,4 +1,3 @@
-import reducer from '../../features/session/sessionSlice';
 import { session } from '../../features/session/sessionSlice';
 
 test('reducers', () => {
