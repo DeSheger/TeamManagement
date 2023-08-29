@@ -2,16 +2,30 @@ import React, { useEffect } from 'react';
 import Layout from './containers/Layout';
 import Navigator from './containers/Navigator';
 import { useDispatch } from 'react-redux';
-import { session } from './features/session/sessionSlice';
+import { session, SessionState } from './features/session/sessionSlice';
 
+const setCookie = (cookie: any, dispatch: Function) => {
+  console.log(cookie)
+  try {
+    JSON.parse(cookie);
+    dispatch(session(JSON.parse(cookie)));
+    console.log("success")
+  } catch (e) {
+    dispatch(session({
+      email: "null",
+      name: "null",
+      surrname: "null",
+      token: "null"
+    }))
+  }
+}
 
 function App() {
   const dispatch = useDispatch();
-  const cookieData = JSON.parse(document.cookie.slice(5));
 
-  useEffect(() =>{
-    dispatch(session(cookieData))
-  },[])
+  useEffect(() => {
+    setCookie(document.cookie.slice(5), dispatch)
+  }, [])
 
   return (
     <Layout>

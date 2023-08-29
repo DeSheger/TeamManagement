@@ -1,5 +1,6 @@
 import axios from "axios"
 import sessionCookie from "../cookies/sessionCookie";
+import { session } from "../features/session/sessionSlice";
 
 const loginService = (email: string, password: string, dispatch: Function) => {
 
@@ -7,6 +8,7 @@ const loginService = (email: string, password: string, dispatch: Function) => {
         email,
         password
     }).then((response) => {
+        dispatch(session(response.data))
         sessionCookie(response.data)
         console.log(response.data)
     }).catch((error) => {

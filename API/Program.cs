@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Domain;
 using Microsoft.AspNetCore.Identity;
 using Application.Mapping;
+using API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +45,8 @@ builder.Services.AddIdentityCore<User>(opt =>
 }).AddEntityFrameworkStores<DataContext>();
 
 builder.Services.AddAuthentication();
+
+builder.Services.AddScoped<TokenService>();
 
 
 builder.Services.AddMediatR(typeof(List.Handler));

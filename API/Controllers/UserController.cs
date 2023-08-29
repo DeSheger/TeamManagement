@@ -1,3 +1,4 @@
+using API.Services;
 using Application.DTOs;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -14,11 +15,14 @@ namespace API.Controllers
         private readonly DataContext _context;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
-        public UserController(DataContext context, IMapper mapper, UserManager<User> userManager)
+        private readonly TokenService _tokenService;
+        public UserController(DataContext context, 
+        IMapper mapper, UserManager<User> userManager, TokenService tokenService)
         {
             _context = context;
             _mapper = mapper;
             _userManager = userManager;
+            _tokenService = tokenService;
         }
 
         [HttpPost("login")]
@@ -37,6 +41,7 @@ namespace API.Controllers
             if(result)
             {
                 SessionDTO Session = _mapper.Map<SessionDTO>(LoggedUser);
+                Session.Token = _tokenService.CreateToken(LoggedUser);
 
                 return Session;
 

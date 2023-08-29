@@ -358,3 +358,8 @@ E:\Projects\TeamManagement\API\obj\Debug\net7.0\refint\API.dll
 E:\Projects\TeamManagement\API\obj\Debug\net7.0\API.pdb
 E:\Projects\TeamManagement\API\obj\Debug\net7.0\API.genruntimeconfig.cache
 E:\Projects\TeamManagement\API\obj\Debug\net7.0\ref\API.dll
+D:\Projects\TeamManagement\API\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Projects\TeamManagement\API\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Projects\TeamManagement\API\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+D:\Projects\TeamManagement\API\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+D:\Projects\TeamManagement\API\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
