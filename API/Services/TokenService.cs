@@ -12,18 +12,24 @@ namespace API.Services
 {
     public class TokenService
     {
+        private readonly IConfiguration _configuration;
+        public TokenService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public string CreateToken(User user)
         {
             var claims = new List<Claim>
             {
+                new Claim(ClaimTypes.NameIdentifier, Convert.ToString(user.Id)),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Surname, user.Surrname),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.NameIdentifier, Convert.ToString(user.Id)),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
-            ("super secret key super secret key super secret key super secret key super secret key"));
+            (_configuration["TokenKey"]));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 

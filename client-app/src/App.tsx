@@ -9,7 +9,6 @@ const setCookie = (cookie: any, dispatch: Function) => {
   try {
     JSON.parse(cookie);
     dispatch(session(JSON.parse(cookie)));
-    console.log("success")
   } catch (e) {
     dispatch(session({
       email: "null",

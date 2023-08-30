@@ -9,11 +9,13 @@ using Persistence;
 using MediatR;
 using Application.Activities;
 using Application.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
     public class ActivityController : BaseController
     {
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<ActivityDTO>>> GetActivitiesList()
         {

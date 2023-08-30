@@ -3,6 +3,7 @@ using Application.DTOs;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace API.Controllers
             _userManager = userManager;
             _tokenService = tokenService;
         }
-
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<SessionDTO>> Login(LoginDTO user)
         {
@@ -47,7 +48,7 @@ namespace API.Controllers
 
             } else return Unauthorized();
         }
-
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult> CreateUser(RegisterDTO user)
         {

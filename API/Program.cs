@@ -7,14 +7,20 @@ using Domain;
 using Microsoft.AspNetCore.Identity;
 using Application.Mapping;
 using API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
                         //// Add services to the container ////
 
-builder.Services.AddControllers();/*.AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);*/
+builder.Services.AddControllers(opt=>{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    opt.Filters.Add(new AuthorizeFilter(policy));
+});
 
                                 // Swagger for now
 
@@ -44,7 +50,19 @@ builder.Services.AddIdentityCore<User>(opt =>
 
 }).AddEntityFrameworkStores<DataContext>();
 
-builder.Services.AddAuthentication();
+var key = new SymmetricSecurityKey(Encoding.UTF8
+    .GetBytes(builder.Configuration["TokenKey"]));
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opt => {
+        opt.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = key,
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 
 builder.Services.AddScoped<TokenService>();
 

@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {}
+    "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {}
   },
   "projects": {
     "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
@@ -69,14 +69,14 @@
         }
       }
     },
-    "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
+    "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
+        "projectUniqueName": "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
         "projectName": "Persistence",
-        "projectPath": "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
+        "projectPath": "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj",
         "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\TeamManagement\\Persistence\\obj\\",
+        "outputPath": "d:\\Projects\\TeamManagement\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
