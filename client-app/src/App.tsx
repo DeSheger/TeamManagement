@@ -1,30 +1,21 @@
 import React, { useEffect } from 'react';
 import Layout from './containers/Layout';
 import Navigator from './containers/Navigator';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { session, SessionState } from './features/session/sessionSlice';
+import authenticationService from './services/authenticationService';
+import { RootState } from './app/store';
+import { setCookie } from './cookies/setCookie';
 
-const setCookie = (cookie: any, dispatch: Function) => {
-  console.log(cookie)
-  try {
-    JSON.parse(cookie);
-    dispatch(session(JSON.parse(cookie)));
-  } catch (e) {
-    dispatch(session({
-      email: "null",
-      name: "null",
-      surrname: "null",
-      token: "null"
-    }))
-  }
-}
 
 function App() {
   const dispatch = useDispatch();
+  const token = useSelector((state:RootState) => state.session.token)
 
   useEffect(() => {
     setCookie(document.cookie.slice(5), dispatch)
-  }, [])
+    authenticationService(token);
+  }, [token])
 
   return (
     <Layout>
