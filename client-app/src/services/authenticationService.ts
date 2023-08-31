@@ -1,17 +1,21 @@
 import axios from "axios"
 
-const authenticationService = (token: string) => {
-    return axios.get("http://localhost:5000/user",
-    {
-        headers: {
-            Authorization : `Bearer ${token}`
-        }
+const authenticationService = async (token: string) => {
+    
+    try {
+        await axios.get("http://localhost:5000/user",
+        {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        });
+
+        console.log("success")
+        return true;
+    } catch (err) {
+        console.log("unauthorized")
+        return false;
     }
-    ).then(() => {
-        return true
-    }).catch(()=> {
-        return false
-    })
 }
 
 export default authenticationService;
