@@ -26,6 +26,7 @@ const Menu = () => {
                             <Link to="/">Start</Link>
                             <Link to="/home">Home</Link>
                             <Link to="/docs">Docs</Link>
+                            <Link to="/companies">Companies</Link>
                         </Nav>
                         <Nav>
                             <Button variant={theme} onClick={() => themeHandler(theme, dispatch)}>Theme: {theme}</Button>

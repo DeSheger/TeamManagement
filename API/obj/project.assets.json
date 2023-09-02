@@ -2941,11 +2941,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\TeamManagement\\API\\API.csproj",
+      "projectUniqueName": "d:\\Projects\\TeamManagement\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\Projects\\TeamManagement\\API\\API.csproj",
+      "projectPath": "d:\\Projects\\TeamManagement\\API\\API.csproj",
       "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\TeamManagement\\API\\obj\\",
+      "outputPath": "d:\\Projects\\TeamManagement\\API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2967,8 +2967,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Projects\\TeamManagement\\Application\\Application.csproj": {
-              "projectPath": "D:\\Projects\\TeamManagement\\Application\\Application.csproj"
+            "d:\\Projects\\TeamManagement\\Application\\Application.csproj": {
+              "projectPath": "d:\\Projects\\TeamManagement\\Application\\Application.csproj"
             }
           }
         }

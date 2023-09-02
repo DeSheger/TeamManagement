@@ -1579,11 +1579,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\TeamManagement\\Application\\Application.csproj",
+      "projectUniqueName": "d:\\Projects\\TeamManagement\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "D:\\Projects\\TeamManagement\\Application\\Application.csproj",
+      "projectPath": "d:\\Projects\\TeamManagement\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\TeamManagement\\Application\\obj\\",
+      "outputPath": "d:\\Projects\\TeamManagement\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1604,11 +1604,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj"
+            "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
+              "projectPath": "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj"
             },
-            "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
-              "projectPath": "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj"
+            "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
+              "projectPath": "d:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj"
             }
           }
         }

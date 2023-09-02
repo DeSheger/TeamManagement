@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {}
+    "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
+    "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
+        "projectUniqueName": "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
+        "projectPath": "d:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\pgste\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\TeamManagement\\Domain\\obj\\",
+        "outputPath": "d:\\Projects\\TeamManagement\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
