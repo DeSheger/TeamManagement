@@ -9,9 +9,8 @@ const CompanyProfile = ({name, descriprion}:any) => {
                 <p className="companyProfile__header-description">{descriprion}</p>
             </header>
             <section className="companyProfile__main">
-                <CompanyNavigator>
+                <CompanyNavigator />
                     
-                </CompanyNavigator>
             </section>
         </div>
     )
