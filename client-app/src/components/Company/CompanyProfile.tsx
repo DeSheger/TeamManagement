@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import CompanyNavigator from "./CompanyNavigator/CompanyNavigator";
+import getCompanies from "../../services/getCompanies";
 
 const CompanyProfile = ({name, descriprion}:any) => {
 
