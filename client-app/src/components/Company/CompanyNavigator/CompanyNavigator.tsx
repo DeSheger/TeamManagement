@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CompanyInfo from "../CompanyContent/CompanyInfo";
 
-const CompanyNavigator = ({ name, descriprion }: any) => {
+const CompanyNavigator = ({company}: any) => {
     const [content, setContent] = useState({
         info: true ,
         members: false,
@@ -21,7 +21,7 @@ const CompanyNavigator = ({ name, descriprion }: any) => {
                 </ul>
             </nav>
             <section className="companyNavigator__content">
-                {content.info ? <CompanyInfo />:null}
+                {content.info ? <CompanyInfo company={company}/>:null}
             </section>
         </div >
     )

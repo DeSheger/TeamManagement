@@ -36,7 +36,7 @@ const Companies = ({theme}:any) => {
                 {CompanyIterate(companies, setCompany)}
             </div>
             <section className="companies__content">
-                <CompanyProfile company={company}/>
+                <CompanyProfile selectedCompany={company}/>
             </section>
         </div>
     );
