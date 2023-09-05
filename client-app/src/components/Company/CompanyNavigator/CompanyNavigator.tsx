@@ -1,9 +1,10 @@
 import { useState } from "react";
 import CompanyInfo from "../CompanyContent/CompanyInfo";
+import { Container, Nav, Navbar, Row } from "react-bootstrap";
 
-const CompanyNavigator = ({company}: any) => {
+const CompanyNavigator = ({ company, theme }: any) => {
     const [content, setContent] = useState({
-        info: true ,
+        info: true,
         members: false,
         groups: false,
         activities: false
@@ -11,19 +12,24 @@ const CompanyNavigator = ({company}: any) => {
 
     return (
 
-        <div className="companyNavigator">
-            <nav className="companyNavigator__menu">
-                <ul className="companyNavigator__list">
-                    <li className="companyNavigator__item">Info</li>
-                    <li className="companyNavigator__item">Members</li>
-                    <li className="companyNavigator__item">Groups</li>
-                    <li className="companyNavigator__item">Activities</li>
-                </ul>
-            </nav>
-            <section className="companyNavigator__content">
-                {content.info ? <CompanyInfo company={company}/>:null}
-            </section>
-        </div >
+        <Container>
+            <Row>
+                <Navbar bg={theme} data-bs-theme={theme}>
+                    <Container>
+                        <Nav className="me-auto">
+                            <Nav.Link>Info</Nav.Link>
+                            <Nav.Link>Groups</Nav.Link>
+                            <Nav.Link>Activities</Nav.Link>
+                            <Nav.Link>Members</Nav.Link>
+                        </Nav>
+                    </Container>
+                </Navbar>
+            </Row>
+            
+            <Row>
+                {content.info ? <CompanyInfo company={company} /> : null}
+            </Row>
+        </Container>
     )
 }
 

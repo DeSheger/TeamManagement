@@ -1,18 +1,26 @@
+import { Container, Row } from "react-bootstrap";
 
-const CompanyInfo = ({company}:any) => {
-    let companyLeader = company?.leader?.name;
-    let companyDesc = company?.description;
+const CompanyInfo = ({ company }: any) => {
+    const companyLeaderName = company?.leader?.name;
+    const companyLeaderSurname = company?.leader?.surrname;
+    const companyDesc = company?.description;
 
-    
+
     return (
-        <section className="companyInfo">
-            <header className="companyInfo__leader">
-                {companyLeader}
-            </header>
-            <div className="companyInfo__desc">
-               {companyDesc}
-            </div>
-        </section>
+        <Container>
+            <Row>
+                <h4>Leader</h4>
+            </Row>
+            <Row>
+            {`${companyLeaderName} ${companyLeaderSurname}`}
+            </Row>
+            <Row>
+                <h4>Description</h4>
+            </Row>
+            <Row>
+            {companyDesc}
+            </Row>
+        </Container>
     )
 }
 

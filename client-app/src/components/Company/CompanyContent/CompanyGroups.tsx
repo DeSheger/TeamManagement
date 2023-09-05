@@ -1,14 +1,26 @@
+import { Container, Row } from "react-bootstrap";
 
-const Group = () => {
-    return
-}
+const CompanyGroups = ({ company }: any) => {
+    const companyLeaderName = company?.leader?.name;
+    const companyLeaderSurname = company?.leader?.surrname;
+    const companyDesc = company?.description;
 
-const CompanyGroups = ({companyMembers}:any) => {
 
     return (
-        <section className="companyGroups">
-            
-        </section>
+        <Container>
+            <Row>
+                <h4>Leader</h4>
+            </Row>
+            <Row>
+            {`${companyLeaderName} ${companyLeaderSurname}`}
+            </Row>
+            <Row>
+                <h4>Description</h4>
+            </Row>
+            <Row>
+            {companyDesc}
+            </Row>
+        </Container>
     )
 }
 

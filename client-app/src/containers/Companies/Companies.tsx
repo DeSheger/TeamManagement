@@ -3,23 +3,24 @@ import getCompanies from "../../services/getCompanies";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import CompanyProfile from "../../components/Company/CompanyProfile";
+import { Col, Container, Row } from "react-bootstrap";
 
 
 const CompanyIterate = (companies: any, setCompany: Function) => {
 
-    if(companies instanceof Array)
-        return companies.map((company:any) => company?<h3 onClick={() => {
+    if (companies instanceof Array)
+        return companies.map((company: any) => company ? <h3 onClick={() => {
             setCompany(company)
-        }}>{company.id} {company.name}</h3>
-        :null)
+        }}>{company.name}</h3>
+            : null)
     else {
         return "No companies"
     }
 }
 
-const Companies = ({theme}:any) => {
+const Companies = ({ theme }: any) => {
     const [companies, setCompanies] = useState([]);
-    const session = useSelector((state:RootState)=> state.session)
+    const session = useSelector((state: RootState) => state.session)
     const [company, setCompany] = useState({});
 
     useEffect(() => {
@@ -28,16 +29,20 @@ const Companies = ({theme}:any) => {
             .then((val) => setCompanies(val))
             .catch((err) => console.log(err))
         console.log(company)
-    },[session, company])
+    }, [session, company])
 
     return (
         <div className="companies">
-            <div className="companies__sidebar">
-                {CompanyIterate(companies, setCompany)}
-            </div>
-            <section className="companies__content">
-                <CompanyProfile selectedCompany={company}/>
-            </section>
+            <Container fluid>
+                <Row>
+                    <Col>
+                        {CompanyIterate(companies, setCompany)}
+                    </Col>
+                    <Col>
+                        <CompanyProfile selectedCompany={company} theme={theme}/>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     );
 }
