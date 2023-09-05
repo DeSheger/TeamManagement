@@ -1,10 +1,18 @@
+import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
+import getCompanyGroups from "../../../services/getCompanyGroups";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../app/store";
 
 const CompanyGroups = ({ company }: any) => {
-    const companyLeaderName = company?.leader?.name;
-    const companyLeaderSurname = company?.leader?.surrname;
-    const companyDesc = company?.description;
+    const [companyGroups, seCompanyGroups] = useState([]);
+    const session = useSelector((state:RootState) => state.session)
 
+    useEffect(() => {
+        getCompanyGroups(company.id, session)
+            .then((val) => console.log(val))
+            .catch((err) => console.log(err))
+    },[])
 
     return (
         <Container>
@@ -12,13 +20,13 @@ const CompanyGroups = ({ company }: any) => {
                 <h4>Leader</h4>
             </Row>
             <Row>
-            {`${companyLeaderName} ${companyLeaderSurname}`}
+            
             </Row>
             <Row>
                 <h4>Description</h4>
             </Row>
             <Row>
-            {companyDesc}
+            
             </Row>
         </Container>
     )

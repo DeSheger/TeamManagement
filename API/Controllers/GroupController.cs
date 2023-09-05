@@ -25,6 +25,12 @@ namespace API.Controllers
             return await Mediator.Send(new Detail.Query(id));
         }
 
+        [HttpGet("companyGroups/{id}")]
+        public async Task<ActionResult<List<GroupDTO>>> GetCompanyGroups(int id)
+        {
+            return await Mediator.Send(new CompanyGroups.Query(id));
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateGroup(GroupDTO group)
         {

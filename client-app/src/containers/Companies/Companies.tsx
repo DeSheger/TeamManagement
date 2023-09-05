@@ -3,15 +3,15 @@ import getCompanies from "../../services/getCompanies";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import CompanyProfile from "../../components/Company/CompanyProfile";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Nav, Row } from "react-bootstrap";
 
 
 const CompanyIterate = (companies: any, setCompany: Function) => {
 
     if (companies instanceof Array)
-        return companies.map((company: any) => company ? <h3 onClick={() => {
+        return companies.map((company: any) => company ? <Nav.Link onClick={() => {
             setCompany(company)
-        }}>{company.name}</h3>
+        }}>{company.name}</Nav.Link>
             : null)
     else {
         return "No companies"
