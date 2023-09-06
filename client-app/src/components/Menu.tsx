@@ -17,7 +17,7 @@ const Menu = () => {
 
     return (
         <nav className="menu">
-            <Navbar bg={theme} data-bs-theme={theme} expand="sm">
+            <Navbar bg={theme} data-bs-theme={theme} expand="sm" style={{borderBottom:"3px solid #4d7ce3"}}>
                 <Container>
                     <Navbar.Brand>TeamManagement</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
