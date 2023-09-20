@@ -7,8 +7,13 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Logo: typeof import('./src/components/menu/Logo.vue')['default']
     Menu: typeof import('./src/components/menu/Menu.vue')['default']
+    Navigation: typeof import('./src/components/menu/Navigation.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Search: typeof import('./src/components/menu/Search.vue')['default']
+    Smmenu: typeof import('./src/components/menu/Smmenu.vue')['default']
+    SmMenu: typeof import('./src/components/menu/SmMenu.vue')['default']
   }
 }
