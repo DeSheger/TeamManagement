@@ -13,7 +13,7 @@ watch(SearchedValue, () => {
 </script>
 
 <template>
-    <nav class="grid grid-cols-5 gap-2 bg-cyan-800 
+    <nav class="grid grid-cols-5 gap-2 bg-stone-900 
     text-white h-16 items-center">
         <Logo />
         <Navigation />

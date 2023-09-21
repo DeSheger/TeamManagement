@@ -5,17 +5,21 @@ import Content from '@/layouts/Content.vue'
 
 <template>
     <main>
-        <Menu />
-        <Content>
-        <slot name="main">
-            <!-- page content -->
-        </slot>
-        </Content>
+        <div class="flex flex-col">
+            <Menu />
+            <Content>
+                <template #main>
+                    <slot name="main">
+                        <!-- page content -->
+                    </slot>
+                </template>
+            </Content>
+        </div>
     </main>
 </template>
 
 <style scoped>
-    main{
-        min-height: 100vh;
-    }
+div {
+    height: 100vh;
+}
 </style>

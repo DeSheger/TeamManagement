@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Card: typeof import('./src/components/homeContent/Card.vue')['default']
     Logo: typeof import('./src/components/menu/Logo.vue')['default']
     Menu: typeof import('./src/components/menu/Menu.vue')['default']
     Navigation: typeof import('./src/components/menu/Navigation.vue')['default']
@@ -15,5 +16,6 @@ declare module '@vue/runtime-core' {
     Search: typeof import('./src/components/menu/Search.vue')['default']
     Smmenu: typeof import('./src/components/menu/Smmenu.vue')['default']
     SmMenu: typeof import('./src/components/menu/SmMenu.vue')['default']
+    Welcome: typeof import('./src/components/homeContent/Welcome.vue')['default']
   }
 }
