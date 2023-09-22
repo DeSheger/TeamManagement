@@ -14,7 +14,7 @@ watch(SearchedValue, () => {
 
 <template>
     <nav class="grid grid-cols-5 gap-2 bg-stone-900 
-    text-white h-16 items-center">
+    text-white h-16 items-center justify-center">
         <Logo />
         <Navigation />
         <Search :SearchedValue="SearchedValue" @ChangeValue="(newValue) => SearchedValue = newValue"/>
@@ -25,6 +25,7 @@ watch(SearchedValue, () => {
 
 <style scoped>
 nav {
+    padding: 16px 0;
     box-shadow: 0px 3px 3px gray;
 }
 </style>

@@ -5,7 +5,7 @@ import Content from '@/layouts/Content.vue'
 
 <template>
     <main>
-        <div class="flex flex-col">
+        <div class="flex flex-col bg-stone-900">
             <Menu />
             <Content>
                 <template #main>
@@ -20,6 +20,7 @@ import Content from '@/layouts/Content.vue'
 
 <style scoped>
 div {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
 }
 </style>

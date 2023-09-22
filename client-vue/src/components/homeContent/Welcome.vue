@@ -1,8 +1,6 @@
-
-import { relative } from 'path';
 <template>
-    <div class="w-full h-full">
-        <div id="welcome__content" class="flex flex-col h-max bg-stone-900">
+    <div class="w-full h-auto">
+        <div id="welcome__content" class="flex flex-col bg-stone-900 items-center justify-center">
             <h1> TeamManagement</h1>
                     <h2> Start organise your company with TeamManagement Toolkit</h2>
                     <ul class="flex flex-row justify-center">
@@ -10,16 +8,14 @@ import { relative } from 'path';
                         <li>Register Now</li>
                     </ul>
         </div>
-        <p></p>
     </div>
 </template>
 
 <style scoped>
 #welcome__content {
     width: 100%;
-    position: relative;
-    top:25%;
-    min-height:300px;
+    height:auto;
+    min-height:500px;
 }
 
 h1 {
