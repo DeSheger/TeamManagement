@@ -7,7 +7,9 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AuthenticationHandler: typeof import('./src/components/AuthenticationHandler/AuthenticationHandler.vue')['default']
     Card: typeof import('./src/components/homeContent/Card.vue')['default']
+    Footer: typeof import('./src/components/Footer/Footer.vue')['default']
     Logo: typeof import('./src/components/menu/Logo.vue')['default']
     Menu: typeof import('./src/components/menu/Menu.vue')['default']
     Navigation: typeof import('./src/components/menu/Navigation.vue')['default']

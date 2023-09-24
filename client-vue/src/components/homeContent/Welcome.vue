@@ -2,11 +2,13 @@
     <div class="w-full h-auto">
         <div id="welcome__content" class="flex flex-col bg-stone-900 items-center justify-center">
             <h1> TeamManagement</h1>
-                    <h2> Start organise your company with TeamManagement Toolkit</h2>
-                    <ul class="flex flex-row justify-center">
-                        <li>Get Started</li>
-                        <li>Register Now</li>
-                    </ul>
+            <h2> Start organise your company with TeamManagement Toolkit</h2>
+            <ul class="flex flex-row justify-center">
+                <li>Get Started</li>
+                <router-link :to="{ name: 'authentication' }">
+                    <li>Register Now</li>
+                </router-link>
+            </ul>
         </div>
     </div>
 </template>
@@ -14,8 +16,8 @@
 <style scoped>
 #welcome__content {
     width: 100%;
-    height:auto;
-    min-height:500px;
+    height: auto;
+    min-height: 500px;
 }
 
 h1 {
@@ -33,14 +35,14 @@ h2 {
     padding: 16px 0
 }
 
-ul > li {
+ul>a {
     padding: 4px;
     margin: 4px;
     color: #0f766e;
     border: 1px solid #0f766e;
 }
 
-ul > li:hover {
+ul>a:hover {
     border: 1px solid #04ffea;
     color: #04ffea;
     cursor: pointer;
