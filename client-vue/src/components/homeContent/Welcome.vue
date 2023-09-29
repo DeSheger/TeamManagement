@@ -4,7 +4,9 @@
             <h1> TeamManagement</h1>
             <h2> Start organise your company with TeamManagement Toolkit</h2>
             <ul class="flex flex-row justify-center">
-                <li>Get Started</li>
+                <router-link :to="{ name: 'docs' }">
+                    <li>Get Started</li>
+                </router-link>
                 <router-link :to="{ name: 'authentication' }">
                     <li>Register Now</li>
                 </router-link>
