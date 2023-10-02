@@ -64,6 +64,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("IsLeader", policy =>
+        policy.Requirements.Add(new CompanyLeaderAuthorization(1,1)));
+});
+
 builder.Services.AddScoped<TokenService>();
 
 
