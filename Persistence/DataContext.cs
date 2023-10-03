@@ -17,29 +17,33 @@ namespace Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Activity>()
-                        .HasOne(a => a.Author)
-                        .WithMany(u => u.ActivitiesAuthor);
+            modelBuilder.Entity<Activity>(ac =>
+            {
+                ac.HasOne(a => a.Author)
+                .WithMany(u => u.ActivitiesAuthor);
 
-            modelBuilder.Entity<Activity>()
-                        .HasMany(a => a.Members)
-                        .WithMany(u => u.ActivitiesToDo);
+                ac.HasMany(a => a.Members)
+                .WithMany(u => u.ActivitiesToDo);
 
-            modelBuilder.Entity<Company>()
-                        .HasOne(a => a.Leader)
-                        .WithMany(u => u.CompaniesLeader);
+            });
 
-            modelBuilder.Entity<Company>()
-                        .HasMany(a => a.Members)
-                        .WithMany(u => u.CompaniesMember);
+            modelBuilder.Entity<Company>(co =>
+            {
+                co.HasOne(a => a.Leader)
+                .WithMany(u => u.CompaniesLeader);
 
-            modelBuilder.Entity<Group>()
-                        .HasOne(a => a.Leader)
-                        .WithMany(u => u.GroupsLeader);
+                co.HasMany(a => a.Members)
+                .WithMany(u => u.CompaniesMember);
+            });
 
-            modelBuilder.Entity<Group>()
-                        .HasMany(a => a.Members)
-                        .WithMany(u => u.GroupsMember);
+            modelBuilder.Entity<Group>(gr =>
+            {
+                gr.HasOne(a => a.Leader)
+                .WithMany(u => u.GroupsLeader);
+
+                gr.HasMany(a => a.Members)
+                .WithMany(u => u.GroupsMember);
+            });
 
             base.OnModelCreating(modelBuilder);
         }
