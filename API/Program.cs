@@ -63,12 +63,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
-
+builder.Services.AddTransient<IAuthorizationHandler, CompanyLeaderAuthorizationHandler>();
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("IsLeader", policy =>
-        policy.Requirements.Add(new CompanyLeaderAuthorization(1,1)));
+        policy.Requirements.Add(new CompanyLeaderRequirement()));
 });
+builder.Services.AddSingleton<IAuthorizationHandler, CompanyLeaderAuthorizationHandler>();
 
 builder.Services.AddScoped<TokenService>();
 

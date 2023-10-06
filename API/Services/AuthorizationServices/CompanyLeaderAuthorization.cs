@@ -1,40 +1,26 @@
+using Application.DTOs;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Persistence;
+using System.Security.Claims;
 
 namespace API.Services
 {
-    public class CompanyLeaderAuthorization : IAuthorizationRequirement
+    public class CompanyLeaderRequirement : IAuthorizationRequirement
     {
-        public readonly int _companyId;
-        public readonly int _userId;
-        public CompanyLeaderAuthorization(int userId, int companyId)
-        {
-            _userId = userId;
-            _companyId = companyId;
-
-        }
+      
     }
 
-    public class CompanyLeaderAuthorizationHandler : AuthorizationHandler<CompanyLeaderAuthorization>
+    public class CompanyLeaderAuthorizationHandler : AuthorizationHandler<CompanyLeaderRequirement, CompanyDTO>
     {
-        private readonly DataContext _context;
-        
-        public CompanyLeaderAuthorizationHandler(DataContext context)
+        protected override Task HandleRequirementAsync(
+            AuthorizationHandlerContext context, 
+            CompanyLeaderRequirement requirement,
+            CompanyDTO resource)
         {
-            _context = context;
-        }
-
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,CompanyLeaderAuthorization User)
-        {
-            User Leader =  _context.Users.Find(User._userId);
-            Company Company =  _context.Companies.Find(User._companyId);
-
-            bool isUserALeader = Company.Id == Leader.Id ? true : false;
-
-            if(isUserALeader)
+            if(context.User.Identity?.Name == resource.Leader.Name)
             {
-                context.Succeed(User);
+                context.Succeed(requirement);
             }
 
             return Task.CompletedTask;

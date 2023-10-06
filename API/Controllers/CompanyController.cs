@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.Companies;
 using Application.DTOs;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -13,6 +14,12 @@ namespace API.Controllers
 {
     public class CompanyController : BaseController
     {
+        private readonly IAuthorizationService _authorizationService;
+
+        public CompanyController(IAuthorizationService authorizationService) 
+        {
+            _authorizationService = authorizationService;
+        }
 
         [HttpGet]
         public async Task<ActionResult<List<CompanyDTO>>> GetACompanyList()
@@ -35,6 +42,13 @@ namespace API.Controllers
         [HttpPatch]
         public async Task<ActionResult> EditCompany(CompanyDTO updatedCompany)
         {
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, updatedCompany, "IsLeader");
+
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
+            }
+
             return Ok(await Mediator.Send(new Edit.Command{EditedCompany = updatedCompany}));
         }
 
