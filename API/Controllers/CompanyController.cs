@@ -48,7 +48,7 @@ namespace API.Controllers
                 .Include(c => c.Leader)
                 .FirstAsync(c=>c.Id == updatedCompany.Id);
 
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, companyInDb, "IsLeader");
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, companyInDb, "IsLeaderInCompany");
 
             if (!authorizationResult.Succeeded)
             {
@@ -61,6 +61,17 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCompany(int id)
         {
+            Company companyInDb = await _context.Companies
+                .Include(c => c.Leader)
+                .FirstAsync(c => c.Id == id);
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, companyInDb, "IsLeaderInCompany");
+
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
+            }
+
             return Ok(await Mediator.Send(new Delete.Command(id)));
         }
     }

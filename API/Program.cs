@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using API.Services.AuthorizationServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,15 +64,24 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
-builder.Services.AddTransient<IAuthorizationHandler, CompanyLeaderAuthorizationHandler>();
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("IsLeader", policy =>
-        policy.Requirements.Add(new CompanyLeaderRequirement()));
-});
-builder.Services.AddSingleton<IAuthorizationHandler, CompanyLeaderAuthorizationHandler>();
 
 builder.Services.AddScoped<TokenService>();
+
+                    // AUTHORIZATION PRINICIPALS
+
+builder.Services.AddTransient<IAuthorizationHandler, CompanyLeaderAuthorizationHandler>();
+builder.Services.AddTransient<IAuthorizationHandler, GroupLeaderAuthorization>();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("IsLeaderInCompany", policy =>
+        policy.Requirements.Add(new CompanyLeaderRequirement()));
+    options.AddPolicy("IsLeaderInGroup", policy =>
+        policy.Requirements.Add(new GroupLeaderRequirement()));
+});
+builder.Services.AddSingleton<IAuthorizationHandler, CompanyLeaderAuthorizationHandler>();
+builder.Services.AddSingleton<IAuthorizationHandler, GroupLeaderAuthorization>();
+
+
 
 
 builder.Services.AddMediatR(typeof(List.Handler));
