@@ -15,10 +15,12 @@ namespace API.Controllers
     public class CompanyController : BaseController
     {
         private readonly IAuthorizationService _authorizationService;
+        private readonly DataContext _context;
 
-        public CompanyController(IAuthorizationService authorizationService) 
+        public CompanyController(IAuthorizationService authorizationService, DataContext context) 
         {
             _authorizationService = authorizationService;
+            _context = context;
         }
 
         [HttpGet]
@@ -42,7 +44,11 @@ namespace API.Controllers
         [HttpPatch]
         public async Task<ActionResult> EditCompany(CompanyDTO updatedCompany)
         {
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, updatedCompany, "IsLeader");
+            Company companyInDb = await _context.Companies
+                .Include(c => c.Leader)
+                .FirstAsync(c=>c.Id == updatedCompany.Id);
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, companyInDb, "IsLeader");
 
             if (!authorizationResult.Succeeded)
             {

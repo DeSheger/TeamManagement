@@ -1,6 +1,7 @@
 using Application.DTOs;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 using System.Security.Claims;
 
@@ -11,16 +12,27 @@ namespace API.Services
       
     }
 
-    public class CompanyLeaderAuthorizationHandler : AuthorizationHandler<CompanyLeaderRequirement, CompanyDTO>
+    public class CompanyLeaderAuthorizationHandler : AuthorizationHandler<CompanyLeaderRequirement, Company>
     {
+        private readonly DataContext _dbcontext;
+
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context, 
             CompanyLeaderRequirement requirement,
-            CompanyDTO resource)
+            Company resource)
         {
-            if(context.User.Identity?.Name == resource.Leader.Name)
+
+
+            var UserIdClaim = context.User.FindFirst(ClaimTypes.NameIdentifier);
+            int UserId = Convert.ToInt32(UserIdClaim.Value);
+
+            if (UserIdClaim != null && resource != null)
             {
-                context.Succeed(requirement);
+                if(UserId == resource.Leader.Id)
+                {
+                    context.Succeed(requirement);
+                }
+                
             }
 
             return Task.CompletedTask;
