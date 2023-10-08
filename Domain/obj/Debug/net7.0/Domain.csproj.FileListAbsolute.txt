@@ -46,3 +46,15 @@ E:\Projects\TeamManagement\Domain\obj\Debug\net7.0\Domain.dll
 E:\Projects\TeamManagement\Domain\obj\Debug\net7.0\refint\Domain.dll
 E:\Projects\TeamManagement\Domain\obj\Debug\net7.0\Domain.pdb
 E:\Projects\TeamManagement\Domain\obj\Debug\net7.0\ref\Domain.dll
+C:\Projects\TeamManagement\Domain\bin\Debug\net7.0\Domain.deps.json
+C:\Projects\TeamManagement\Domain\bin\Debug\net7.0\Domain.dll
+C:\Projects\TeamManagement\Domain\bin\Debug\net7.0\Domain.pdb
+C:\Projects\TeamManagement\Domain\obj\Debug\net7.0\Domain.csproj.AssemblyReference.cache
+C:\Projects\TeamManagement\Domain\obj\Debug\net7.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TeamManagement\Domain\obj\Debug\net7.0\Domain.AssemblyInfoInputs.cache
+C:\Projects\TeamManagement\Domain\obj\Debug\net7.0\Domain.AssemblyInfo.cs
+C:\Projects\TeamManagement\Domain\obj\Debug\net7.0\Domain.csproj.CoreCompileInputs.cache
+C:\Projects\TeamManagement\Domain\obj\Debug\net7.0\Domain.dll
+C:\Projects\TeamManagement\Domain\obj\Debug\net7.0\refint\Domain.dll
+C:\Projects\TeamManagement\Domain\obj\Debug\net7.0\Domain.pdb
+C:\Projects\TeamManagement\Domain\obj\Debug\net7.0\ref\Domain.dll
