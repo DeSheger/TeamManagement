@@ -25,6 +25,7 @@ namespace API.Controllers
             _userManager = userManager;
             _tokenService = tokenService;
         }
+        
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<SessionDto>> Login(LoginDto user)
@@ -48,6 +49,7 @@ namespace API.Controllers
 
             } else return Unauthorized();
         }
+        
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult> CreateUser(RegisterDto user)

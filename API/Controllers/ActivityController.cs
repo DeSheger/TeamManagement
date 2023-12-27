@@ -8,7 +8,6 @@ namespace API.Controllers
 {
     public class ActivityController : BaseController
     {
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<ActivityDto>>> GetActivitiesList()
         {

@@ -1,7 +1,5 @@
-using Application.DTOs;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
 using System.Security.Claims;
 
