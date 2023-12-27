@@ -11,12 +11,12 @@ namespace Application.Activities
 {
     public class List
     {
-        public class Query : IRequest<List<ActivityDTO>>
+        public class Query : IRequest<List<ActivityDto>>
         {
 
         }
 
-        public class Handler : IRequestHandler<Query, List<ActivityDTO>>
+        public class Handler : IRequestHandler<Query, List<ActivityDto>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -26,11 +26,11 @@ namespace Application.Activities
                 _mapper = mapper;
             }
             
-            public async Task<List<ActivityDTO>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<ActivityDto>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var result = await _context.Activities
-                    .ProjectTo<ActivityDTO>(_mapper.ConfigurationProvider)
-                    .ToListAsync();
+                    .ProjectTo<ActivityDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync(cancellationToken);
 
 
             return result;

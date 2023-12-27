@@ -11,7 +11,7 @@ namespace Application.Activities
     {
         public class Command : IRequest
         {
-            public ActivityDTO Activity;
+            public ActivityDto Activity;
         }
 
         public class Handler : IRequestHandler<Command>
@@ -28,67 +28,67 @@ namespace Application.Activities
 
                 Activity activity = _mapper.Map<Activity>(request.Activity);
 
-                Activity ExistActivity = await _context.Activities
+                Activity existActivity = await _context.Activities
                     .Include(a => a.Author)
                     .Include(a => a.Group)
                     .Include(a => a.Company)
                     .Include(a => a.Members)
-                    .FirstOrDefaultAsync(x => x.Id == activity.Id);
+                    .FirstOrDefaultAsync(x => x.Id == activity.Id, cancellationToken);
 
-                Company ExistCompany = await _context.Companies
+                Company existCompany = await _context.Companies
                     .Include(c => c.Leader)
                     .Include(c => c.Members)
-                    .FirstOrDefaultAsync(c => c.Id == ExistActivity.Company.Id);
+                    .FirstOrDefaultAsync(c => c.Id == existActivity.Company.Id, cancellationToken);
 
-                List<Group> CompanyGroups = await _context.Groups
+                List<Group> companyGroups = await _context.Groups
                     .Include(g => g.Company)
                     .Include(g => g.Leader)
-                    .Where(g => g.Company.Id == ExistCompany.Id)
-                    .ToListAsync();
+                    .Where(g => g.Company.Id == existCompany.Id)
+                    .ToListAsync(cancellationToken);
 
-                Group ExistGroup = null;
+                Group existGroup = null;
 
-                List<User> ExistMembers = new();
+                List<User> existMembers = new();
 
-                User ExistAuthor = null;
+                User existAuthor = null;
 
                 // CHECK: IS GROUP IN COMPANY
-                foreach (var CompanyGroup in CompanyGroups)
+                foreach (var companyGroup in companyGroups)
                 {
-                    if (CompanyGroup.Id == activity.Group.Id)
-                        ExistGroup = await _context.Groups
+                    if (companyGroup.Id == activity.Group.Id)
+                        existGroup = await _context.Groups
                         .Include(g => g.Members)
                         .Include(g => g.Leader)
-                        .FirstOrDefaultAsync(g => g.Id == activity.Group.Id);
+                        .FirstOrDefaultAsync(g => g.Id == activity.Group.Id, cancellationToken);
                 }
 
                 // CHECK ARE MEMBERS IN GROUP
-                foreach (var GroupMember in ExistGroup.Members)
+                foreach (var groupMember in existGroup.Members)
                 {
-                    foreach (var ActivityMember in activity.Members)
+                    foreach (var activityMember in activity.Members)
                     {
-                        if (GroupMember.Id == ActivityMember.Id)
-                            ExistMembers.Add(await _context.Users.FindAsync(ActivityMember.Id));
+                        if (groupMember.Id == activityMember.Id)
+                            existMembers.Add(await _context.Users.FindAsync(activityMember.Id));
                     }
-                    if (GroupMember.Id == activity.Author.Id) // CHECK IS AUTHOR IN GROUP
-                        ExistAuthor = await _context.Users.FindAsync(GroupMember.Id);
+                    if (groupMember.Id == activity.Author.Id) // CHECK IS AUTHOR IN GROUP
+                        existAuthor = await _context.Users.FindAsync(groupMember.Id);
                 }
 
 
-                if(ExistAuthor != null)
+                if(existAuthor != null)
                 {
-                    ExistActivity.Author = ExistAuthor;
+                    existActivity.Author = existAuthor;
                 } else {
                     return Unit.Value;
                 }
                 
-                ExistActivity.Title = activity.Title;
-                ExistActivity.DateStart = activity.DateStart;
-                ExistActivity.DateEnd = activity.DateEnd;
-                ExistActivity.Description = activity.Description;
-                ExistActivity.Members = ExistMembers;
+                existActivity.Title = activity.Title;
+                existActivity.DateStart = activity.DateStart;
+                existActivity.DateEnd = activity.DateEnd;
+                existActivity.Description = activity.Description;
+                existActivity.Members = existMembers;
 
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
             }

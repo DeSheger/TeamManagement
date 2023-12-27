@@ -1,11 +1,11 @@
 namespace Application.DTOs
 {
-    public class CompanyDTO
+    public class CompanyDto
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public string Description { get; set; } = null!;
-        public UserDTO Leader { get; set; } = null!;
-        public ICollection<UserDTO> Members { get; set; } = new List<UserDTO>();
+        public int Id { get; init; }
+        public string Name { get; init; } = null!;
+        public string Description { get; init; } = null!;
+        public UserDto Leader { get; init; } = null!;
+        public ICollection<UserDto> Members { get; init; } = new List<UserDto>();
     }
 }

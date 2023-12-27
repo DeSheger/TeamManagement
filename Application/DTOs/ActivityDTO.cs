@@ -2,16 +2,16 @@ using Domain;
 
 namespace Application.DTOs
 {
-    public class ActivityDTO
+    public class ActivityDto
     {
-        public int Id { get; set; } 
-        public string Title { get; set; }
-        public DateTime DateStart { get; set; }
-        public DateTime? DateEnd { get; set;}
-        public string Description {get; set; }
-        public UserDTO Author { get; set; }
-        public int CompanyId { get; set; }
-        public int GroupId { get; set; }
-        public ICollection<UserDTO> Members { get; set; } = new List<UserDTO>();
+        public int Id { get; init; } 
+        public string Title { get; init; } = null!;
+        public DateTime DateStart { get; init; } = DateTime.Now!;
+        public DateTime? DateEnd { get; init;} = null!;
+        public string Description {get; init; } = null!;
+        public UserDto Author { get; init; } = null!;
+        public CompanyDto Company { get; init; } = null!;
+        public GroupDto Group { get; init; } = null!;
+        public ICollection<UserDto> Members { get; init; } = new List<UserDto>();
     }
 }

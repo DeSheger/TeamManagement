@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Application.Companies;
 using Application.DTOs;
 using Domain;
@@ -24,25 +20,25 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<CompanyDTO>>> GetACompanyList()
+        public async Task<ActionResult<List<CompanyDto>>> GetACompanyList()
         {
             return await Mediator.Send(new List.Query());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CompanyDTO>> GetCompany(int id)
+        public async Task<ActionResult<CompanyDto>> GetCompany(int id)
         {
             return await Mediator.Send(new Detail.Query(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateCompany(CompanyDTO company)
+        public async Task<ActionResult> CreateCompany(CompanyDto company)
         {
-            return Ok(await Mediator.Send(new Create.Command{CompanyDTO = company}));
+            return Ok(await Mediator.Send(new Create.Command{CompanyDto = company}));
         }
 
         [HttpPatch]
-        public async Task<ActionResult> EditCompany(CompanyDTO updatedCompany)
+        public async Task<ActionResult> EditCompany(CompanyDto updatedCompany)
         {
             Company companyInDb = await _context.Companies
                 .Include(c => c.Leader)

@@ -11,7 +11,7 @@ namespace Application.Groups
     {
         public class Command : IRequest
         {
-            public GroupDTO EditedGroup;
+            public GroupDto EditedGroup;
         }
 
         public class Handler : IRequestHandler<Command>
@@ -28,41 +28,41 @@ namespace Application.Groups
             {
                 Group group = _mapper.Map<Group>(request.EditedGroup);
 
-                var ExistGroup = await _context.Groups
+                var existGroup = await _context.Groups
                     .Include(g => g.Company)
                     .Include(g => g.Members)
                     .FirstOrDefaultAsync(g => g.Id == group.Id);
 
-                var ExistCompany = await _context.Companies
+                var existCompany = await _context.Companies
                     .Include(c => c.Members)
-                    .FirstOrDefaultAsync(c => c.Id == ExistGroup.Company.Id);
+                    .FirstOrDefaultAsync(c => c.Id == existGroup.Company.Id);
 
-                var ExistMembers = new List<User>();
+                var existMembers = new List<User>();
 
-                User ExistLeader = null;
+                User existLeader = null;
 
-                foreach(var CompanyMember in ExistCompany.Members)
+                foreach(var companyMember in existCompany.Members)
                 {
                     // Check: Is GroupMember in CompanyMembers
-                    foreach(var GroupMember in group.Members)
+                    foreach(var groupMember in group.Members)
                     {
-                        if(CompanyMember.Id == GroupMember.Id)
-                            ExistMembers.Add(await _context.Users.FindAsync(GroupMember.Id));
+                        if(companyMember.Id == groupMember.Id)
+                            existMembers.Add(await _context.Users.FindAsync(groupMember.Id));
                     }
                     // Check: Is Leader in CompanyMembers
-                    if(CompanyMember.Id == group.Leader.Id)
-                        ExistLeader = await _context.Users.FindAsync(group.Leader.Id);
+                    if(companyMember.Id == group.Leader.Id)
+                        existLeader = await _context.Users.FindAsync(group.Leader.Id);
                 }
 
-                if(ExistLeader != null)
+                if(existLeader != null)
                 {
-                    ExistGroup.Leader = ExistLeader;
+                    existGroup.Leader = existLeader;
                 } else {
                     return Unit.Value;
                 }
-                ExistGroup.Name = group.Name;
-                ExistGroup.Description = group.Description;
-                ExistGroup.Members = ExistMembers;
+                existGroup.Name = group.Name;
+                existGroup.Description = group.Description;
+                existGroup.Members = existMembers;
 
                 await _context.SaveChangesAsync();
 

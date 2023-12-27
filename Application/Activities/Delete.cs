@@ -1,4 +1,3 @@
-using Domain;
 using MediatR;
 using Persistence;
 
@@ -27,7 +26,7 @@ namespace Application.Activities
             {
                 var result = await _context.Activities.FindAsync(request.Id);
                 _context.Activities.Remove(result);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
             }

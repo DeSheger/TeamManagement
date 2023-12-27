@@ -11,7 +11,7 @@ namespace Application.Groups
     {
         public class Command : IRequest
         {
-            public GroupDTO Group;
+            public GroupDto Group;
         }
 
         public class Handler : IRequestHandler<Command>
@@ -35,15 +35,15 @@ namespace Application.Groups
                 var existMembers = new List<User>() { };
 
                 // Check: Is Group Member is in Comapny?
-                foreach (var CompanyMember in existCompany.Members)
+                foreach (var companyMember in existCompany.Members)
                 {
-                    foreach(var GroupMember in group.Members)
+                    foreach(var groupMember in group.Members)
                     {
-                        if(GroupMember.Id == CompanyMember.Id)
-                            existMembers.Add(await _context.Users.FindAsync(GroupMember.Id));
+                        if(groupMember.Id == companyMember.Id)
+                            existMembers.Add(await _context.Users.FindAsync(groupMember.Id));
                     }
-                    if(CompanyMember.Id == group.Leader.Id) //CHECK: IS LEADER IN COMPANY MEMBERS?
-                        existLeader = await _context.Users.FindAsync(CompanyMember.Id);
+                    if(companyMember.Id == group.Leader.Id) //CHECK: IS LEADER IN COMPANY MEMBERS?
+                        existLeader = await _context.Users.FindAsync(companyMember.Id);
                 }
 
                 var result = new Group()

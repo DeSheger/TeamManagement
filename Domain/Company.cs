@@ -11,7 +11,7 @@ namespace Domain
     public class Company
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; init; }
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public User Leader { get; set; } = null!;

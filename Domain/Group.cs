@@ -11,10 +11,10 @@ namespace Domain
     public class Group
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; init; }
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
-        public Company Company { get; set; } = null!;
+        public Company Company { get; init; } = null!;
         public User Leader { get; set; } = null!;
         public ICollection<User>? Members { get; set; }  = new List<User>();
     }

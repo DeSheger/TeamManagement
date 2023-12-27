@@ -30,7 +30,7 @@ namespace Application.Activities
                     .ThenInclude(a => a.Company)
                 .Include(u => u.ActivitiesAuthor) 
                     .ThenInclude(a => a.Group)
-                .FirstOrDefaultAsync(u => u.Id == request.AuthorId);
+                .FirstOrDefaultAsync(u => u.Id == request.AuthorId, cancellationToken);
             
             var activitiesByUser = user.ActivitiesAuthor.ToList();
 

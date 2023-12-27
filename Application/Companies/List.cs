@@ -10,12 +10,12 @@ namespace Application.Companies
 {
     public class List
     {
-        public class Query : IRequest<List<CompanyDTO>>
+        public class Query : IRequest<List<CompanyDto>>
         {
 
         }
 
-        public class Handler : IRequestHandler<Query, List<CompanyDTO>>
+        public class Handler : IRequestHandler<Query, List<CompanyDto>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -24,13 +24,13 @@ namespace Application.Companies
                 _context = context;
                 _mapper = mapper;
             }
-            public async Task<List<CompanyDTO>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<CompanyDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var CompaniesDTO = await _context.Companies
-                    .ProjectTo<CompanyDTO>(_mapper.ConfigurationProvider)
-                    .ToListAsync();
+                var companiesDto = await _context.Companies
+                    .ProjectTo<CompanyDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync(cancellationToken);
                 
-                return CompaniesDTO;
+                return companiesDto;
             }
         }
     }

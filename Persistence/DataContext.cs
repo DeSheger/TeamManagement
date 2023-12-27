@@ -10,9 +10,9 @@ namespace Persistence
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         { }
 
-        public DbSet<Activity> Activities { get; set; }
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<Company> Companies { get; set; }
+        public DbSet<Activity> Activities { get; init; }
+        public DbSet<Group> Groups { get; init; }
+        public DbSet<Company> Companies { get; init; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

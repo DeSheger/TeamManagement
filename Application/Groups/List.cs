@@ -10,12 +10,12 @@ namespace Application.Groups
 {
     public class List
     {
-        public class Query : IRequest<List<GroupDTO>>
+        public class Query : IRequest<List<GroupDto>>
         {
 
         }
 
-        public class Handler : IRequestHandler<Query, List<GroupDTO>>
+        public class Handler : IRequestHandler<Query, List<GroupDto>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -24,10 +24,10 @@ namespace Application.Groups
                 _context = context;
                 _mapper = mapper;
             }
-            public async Task<List<GroupDTO>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<GroupDto>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var result = await _context.Groups
-                    .ProjectTo<GroupDTO>(_mapper.ConfigurationProvider)
+                    .ProjectTo<GroupDto>(_mapper.ConfigurationProvider)
                     .ToListAsync();
                     
                 return result;

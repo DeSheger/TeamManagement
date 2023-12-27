@@ -9,7 +9,7 @@ namespace Application.Groups
 {
     public class CompanyGroups
     {
-        public class Query : IRequest<List<GroupDTO>>
+        public class Query : IRequest<List<GroupDto>>
         {
             public readonly int CompanyId;
             public Query(int id)
@@ -18,7 +18,7 @@ namespace Application.Groups
             }
         }
 
-        public class Handler : IRequestHandler<Query, List<GroupDTO>>
+        public class Handler : IRequestHandler<Query, List<GroupDto>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -27,12 +27,12 @@ namespace Application.Groups
                 _mapper = mapper;
                 _context = context;
             }
-            public async Task<List<GroupDTO>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<GroupDto>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var result = _context.Groups
                     .Include(g => g.Company)
                     .Where(g => g.Company.Id == request.CompanyId)
-                    .ProjectTo<GroupDTO>(_mapper.ConfigurationProvider)
+                    .ProjectTo<GroupDto>(_mapper.ConfigurationProvider)
                     .ToList();
                 
                 return result;

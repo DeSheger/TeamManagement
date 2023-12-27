@@ -25,9 +25,10 @@ namespace API.Controllers
             _userManager = userManager;
             _tokenService = tokenService;
         }
+        
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<SessionDTO>> Login(LoginDTO user)
+        public async Task<ActionResult<SessionDto>> Login(LoginDto user)
         {
             var LoggedUser = await _userManager.Users
             .Where(x => x.Email == user.Email)
@@ -41,16 +42,17 @@ namespace API.Controllers
 
             if(result)
             {
-                SessionDTO Session = _mapper.Map<SessionDTO>(LoggedUser);
+                SessionDto Session = _mapper.Map<SessionDto>(LoggedUser);
                 Session.Token = _tokenService.CreateToken(LoggedUser);
 
                 return Session;
 
             } else return Unauthorized();
         }
+        
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult> CreateUser(RegisterDTO user)
+        public async Task<ActionResult> CreateUser(RegisterDto user)
         {
             User NewUser = new ()
             {
@@ -68,10 +70,10 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<UserDTO>>> GetUsersList()
+        public async Task<ActionResult<List<UserDto>>> GetUsersList()
         {
             var user = await _context.Users
-                .ProjectTo<UserDTO>(_mapper.ConfigurationProvider)
+                .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
             if (user == null)
@@ -83,18 +85,18 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDTO>> GetUser(int id)
+        public async Task<ActionResult<UserDto>> GetUser(int id)
         {
             var User = await _context.Users
                 .FindAsync(id);
 
-            var UserDTO = _mapper.Map<UserDTO>(User);
+            var UserDTO = _mapper.Map<UserDto>(User);
 
             return UserDTO;
         }
 
         [HttpPatch]
-        public async Task<ActionResult> EditUser(RegisterDTO user)
+        public async Task<ActionResult> EditUser(RegisterDto user)
         {
             var EditUser = await _context.Users.FindAsync(user.Id);
             EditUser.Name = user.Name;

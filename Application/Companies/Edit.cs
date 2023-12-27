@@ -11,7 +11,7 @@ namespace Application.Companies
     {
         public class Command : IRequest
         {
-            public CompanyDTO EditedCompany;
+            public CompanyDto EditedCompany;
         }
 
         public class Handler : IRequestHandler<Command>
@@ -30,7 +30,7 @@ namespace Application.Companies
 
                 var existCompany = await _context.Companies
                .Include(c => c.Members)
-               .FirstOrDefaultAsync(c => c.Id == updatedCompany.Id);
+               .FirstOrDefaultAsync(c => c.Id == updatedCompany.Id, cancellationToken);
 
                 if (existCompany == null)
                 {
@@ -42,7 +42,7 @@ namespace Application.Companies
 
                 foreach (var member in updatedCompany.Members)
                 {
-                    existMembers.Add(_context.Users.Find(member.Id));
+                    existMembers.Add(await _context.Users.FindAsync(member.Id));
                 }
 
                 existCompany.Name = updatedCompany.Name;
@@ -50,7 +50,7 @@ namespace Application.Companies
                 existCompany.Leader = existLeader;
                 existCompany.Members = existMembers;
 
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
             }

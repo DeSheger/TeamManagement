@@ -1,10 +1,10 @@
 namespace Application.DTOs
 {
-    public class SessionDTO
+    public class SessionDto
     {
-        public string Email { get; set; }
-        public string Name { get; set;}
-        public string Surrname { get; set;}
+        public string Email { get; init; }
+        public string Name { get; init;}
+        public string Surrname { get; init;}
         public string Token { get; set;}
     }
 }
