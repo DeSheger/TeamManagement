@@ -32,7 +32,7 @@ namespace Application.Companies
                 var result = await _context.Companies
                     .Include(x => x.Leader)
                     .Include(x => x.Members)
-                    .FirstOrDefaultAsync(x => x.Id == request.UserId);
+                    .FirstOrDefaultAsync(x => x.Id == request.UserId, cancellationToken);
                 
                 var resultDto = _mapper.Map<Company,CompanyDto>(result);
 

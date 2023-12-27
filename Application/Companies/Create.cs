@@ -32,7 +32,7 @@ namespace Application.Companies
 
                 foreach (var member in company.Members)
                 {
-                    existMembers.Add(_context.Users.Find(member.Id));
+                    existMembers.Add(await _context.Users.FindAsync(member.Id));
                 }
 
                 var result = new Company()
@@ -44,7 +44,7 @@ namespace Application.Companies
                 };
                 
                 _context.Companies.Add(result);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
                 
                 return Unit.Value;
             }

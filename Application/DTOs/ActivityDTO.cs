@@ -4,14 +4,14 @@ namespace Application.DTOs
 {
     public class ActivityDto
     {
-        public int Id { get; set; } 
-        public string Title { get; set; } = null!;
-        public DateTime DateStart { get; set; } = DateTime.Now!;
-        public DateTime? DateEnd { get; set;} = null!;
-        public string Description {get; set; } = null!;
-        public UserDto Author { get; set; } = null!;
-        public CompanyDto Company { get; set; } = null!;
-        public GroupDto Group { get; set; } = null!;
-        public ICollection<UserDto>? Members { get; set; } = new List<UserDto>();
+        public int Id { get; init; } 
+        public string Title { get; init; } = null!;
+        public DateTime DateStart { get; init; } = DateTime.Now!;
+        public DateTime? DateEnd { get; init;} = null!;
+        public string Description {get; init; } = null!;
+        public UserDto Author { get; init; } = null!;
+        public CompanyDto Company { get; init; } = null!;
+        public GroupDto Group { get; init; } = null!;
+        public ICollection<UserDto> Members { get; init; } = new List<UserDto>();
     }
 }

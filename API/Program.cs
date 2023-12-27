@@ -1,142 +1,19 @@
-using Application.Activities;
-using MediatR;
+using API.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using Microsoft.Extensions.DependencyInjection;
 using Domain;
 using Microsoft.AspNetCore.Identity;
-using API.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using API.Services.AuthorizationServices;
-using Application.AutoMapper;
-using Microsoft.OpenApi.Models;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
-                        //// Add services to the container ////
-
-builder.Services.AddControllers(opt=>{
-    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-    opt.Filters.Add(new AuthorizeFilter(policy));
-});
-
-                                // Swagger for now
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Managoal.API", Version = "v1" });
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        In = ParameterLocation.Header,
-        Description = "Enter token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        BearerFormat = "JWT",
-        Scheme = "bearer"
-    });
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[] { }
-        }
-    });
-});
-
-                              // Connections with DB
-
-builder.Services.AddDbContext<DataContext>(opt => 
-{
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-
-                    // Until client-app is in developement stage
-
-builder.Services.AddCors(opt => {
-    opt.AddPolicy("CorsPolicy",policy => {
-        policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
-    });
-});
-
-                    // Add UserIdentity and Authentication
-
-builder.Services.AddIdentityCore<User>(opt =>
-{
-    opt.Password.RequireNonAlphanumeric = false;
-
-}).AddEntityFrameworkStores<DataContext>();
-
-var key = new SymmetricSecurityKey(Encoding.UTF8
-    .GetBytes(builder.Configuration["TokenKey"]));
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(opt => {
-        opt.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = key,
-            ValidateIssuer = false,
-            ValidateAudience = false
-        };
-    });
-
-builder.Services.AddScoped<TokenService>();
-
-                    // AUTHORIZATION PRINICIPALS
-
-builder.Services.AddTransient<IAuthorizationHandler, CompanyLeaderAuthorizationHandler>();
-builder.Services.AddTransient<IAuthorizationHandler, GroupLeaderAuthorization>();
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("IsLeaderInCompany", policy =>
-        policy.Requirements.Add(new CompanyLeaderRequirement()));
-    options.AddPolicy("IsLeaderInGroup", policy =>
-        policy.Requirements.Add(new GroupLeaderRequirement()));
-});
-builder.Services.AddSingleton<IAuthorizationHandler, CompanyLeaderAuthorizationHandler>();
-builder.Services.AddSingleton<IAuthorizationHandler, GroupLeaderAuthorization>();
-
-
-
-
-builder.Services.AddMediatR(typeof(List.Handler));
-
-                        // Add AutoMapper to DI
-
-builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddServices(builder.Configuration);
 
 var app = builder.Build();
 
-                    // Configure the HTTP request pipeline.
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseCors("CorsPolicy");
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-                        // Seed data and migartions for DB
+app.ConfigureServices(builder.Environment);
 
 using var scope = app.Services.CreateScope();
+
 var services = scope.ServiceProvider;
 
 try
@@ -152,6 +29,4 @@ catch (Exception ex)
     logger.LogError(ex, "An error durring migration");
 }
 
-
-                            // Running API
 app.Run();

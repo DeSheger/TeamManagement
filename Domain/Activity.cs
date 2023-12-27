@@ -10,7 +10,7 @@ namespace Domain
     public class Activity
     {
         [Key]
-        public int Id { get; set; } 
+        public int Id { get; init; } 
         public string Title { get; set; } = null!;
         public DateTime DateStart { get; set; } = DateTime.Now!;
         public DateTime? DateEnd { get; set;} = null!;

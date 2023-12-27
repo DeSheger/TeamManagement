@@ -27,7 +27,7 @@ namespace Application.Companies
             {
                 var result = await _context.Companies.FindAsync(request.Id);
                 _context.Companies.Remove(result);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
             }

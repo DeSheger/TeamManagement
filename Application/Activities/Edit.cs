@@ -33,18 +33,18 @@ namespace Application.Activities
                     .Include(a => a.Group)
                     .Include(a => a.Company)
                     .Include(a => a.Members)
-                    .FirstOrDefaultAsync(x => x.Id == activity.Id);
+                    .FirstOrDefaultAsync(x => x.Id == activity.Id, cancellationToken);
 
                 Company existCompany = await _context.Companies
                     .Include(c => c.Leader)
                     .Include(c => c.Members)
-                    .FirstOrDefaultAsync(c => c.Id == existActivity.Company.Id);
+                    .FirstOrDefaultAsync(c => c.Id == existActivity.Company.Id, cancellationToken);
 
                 List<Group> companyGroups = await _context.Groups
                     .Include(g => g.Company)
                     .Include(g => g.Leader)
                     .Where(g => g.Company.Id == existCompany.Id)
-                    .ToListAsync();
+                    .ToListAsync(cancellationToken);
 
                 Group existGroup = null;
 
@@ -59,7 +59,7 @@ namespace Application.Activities
                         existGroup = await _context.Groups
                         .Include(g => g.Members)
                         .Include(g => g.Leader)
-                        .FirstOrDefaultAsync(g => g.Id == activity.Group.Id);
+                        .FirstOrDefaultAsync(g => g.Id == activity.Group.Id, cancellationToken);
                 }
 
                 // CHECK ARE MEMBERS IN GROUP
@@ -88,7 +88,7 @@ namespace Application.Activities
                 existActivity.Description = activity.Description;
                 existActivity.Members = existMembers;
 
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
             }

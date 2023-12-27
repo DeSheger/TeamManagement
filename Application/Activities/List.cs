@@ -30,7 +30,7 @@ namespace Application.Activities
             {
                 var result = await _context.Activities
                     .ProjectTo<ActivityDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync();
+                    .ToListAsync(cancellationToken);
 
 
             return result;

@@ -35,7 +35,7 @@ namespace Application.Activities
                     .Include(x => x.Company)
                     .Include(x => x.Group)
                     .Include(x => x.Members)
-                    .FirstOrDefaultAsync(x => x.Id == request.ActivityId);
+                    .FirstOrDefaultAsync(x => x.Id == request.ActivityId, cancellationToken);
                 
                 var resultDto = _mapper.Map<ActivityDto>(result);
 

@@ -30,13 +30,13 @@ namespace Application.Activities
                 Company existCompany = await _context.Companies
                     .Include(c => c.Leader)
                     .Include(c => c.Members)
-                    .FirstOrDefaultAsync(c => c.Id == activity.Company.Id);
+                    .FirstOrDefaultAsync(c => c.Id == activity.Company.Id, cancellationToken);
 
                 List<Group> companyGroups = await _context.Groups
                     .Include(g => g.Company)
                     .Include(g => g.Leader)
                     .Where(g => g.Company.Id == existCompany.Id)
-                    .ToListAsync();
+                    .ToListAsync(cancellationToken);
 
                 Group existGroup = null;
 
@@ -51,7 +51,7 @@ namespace Application.Activities
                         existGroup = await _context.Groups
                         .Include(g => g.Members)
                         .Include(g => g.Leader)
-                        .FirstOrDefaultAsync(g => g.Id == activity.Group.Id);
+                        .FirstOrDefaultAsync(g => g.Id == activity.Group.Id, cancellationToken);
                 }
 
                 // CHECK ARE MEMBERS IN GROUP
@@ -79,7 +79,7 @@ namespace Application.Activities
                 };
 
                 _context.Activities.Add(result);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
             }

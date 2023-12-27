@@ -28,7 +28,7 @@ namespace Application.Companies
             {
                 var companiesDto = await _context.Companies
                     .ProjectTo<CompanyDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync();
+                    .ToListAsync(cancellationToken);
                 
                 return companiesDto;
             }
