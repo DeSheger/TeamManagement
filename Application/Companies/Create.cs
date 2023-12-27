@@ -10,7 +10,7 @@ namespace Application.Companies
     {
         public class Command : IRequest
         {
-            public CompanyDTO CompanyDTO;
+            public CompanyDto CompanyDto;
         }
 
         public class Handler : IRequestHandler<Command>
@@ -24,7 +24,7 @@ namespace Application.Companies
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                Company company = _mapper.Map<Company>(request.CompanyDTO);
+                Company company = _mapper.Map<Company>(request.CompanyDto);
                 
                 User leader = await _context.Users.FindAsync(company.Leader.Id);
 

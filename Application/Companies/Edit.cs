@@ -11,7 +11,7 @@ namespace Application.Companies
     {
         public class Command : IRequest
         {
-            public CompanyDTO EditedCompany;
+            public CompanyDto EditedCompany;
         }
 
         public class Handler : IRequestHandler<Command>

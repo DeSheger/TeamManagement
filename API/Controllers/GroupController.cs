@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Application.DTOs;
 using Application.Groups;
 using Domain;
@@ -25,31 +21,31 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<List<GroupDTO>>> GetGroupsList()
+        public async Task<ActionResult<List<GroupDto>>> GetGroupsList()
         {
             return await Mediator.Send(new List.Query());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GroupDTO>> GetGroup(int id)
+        public async Task<ActionResult<GroupDto>> GetGroup(int id)
         {
             return await Mediator.Send(new Detail.Query(id));
         }
 
         [HttpGet("companyGroups/{id}")]
-        public async Task<ActionResult<List<GroupDTO>>> GetCompanyGroups(int id)
+        public async Task<ActionResult<List<GroupDto>>> GetCompanyGroups(int id)
         {
             return await Mediator.Send(new CompanyGroups.Query(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateGroup(GroupDTO group)
+        public async Task<ActionResult> CreateGroup(GroupDto group)
         {
             return Ok(await Mediator.Send(new Create.Command{Group = group}));
         }
 
         [HttpPatch]
-        public async Task<ActionResult> EditGroup(GroupDTO group)
+        public async Task<ActionResult> EditGroup(GroupDto group)
         {
             Group groupInDb = await _context.Groups.Include(g=>g.Leader).FirstAsync(g => g.Id == group.Id);
 

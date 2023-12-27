@@ -9,16 +9,16 @@ namespace Application.Companies
 {
     public class Detail
     {
-        public class Query : IRequest<CompanyDTO>
+        public class Query : IRequest<CompanyDto>
         {
             public readonly int UserId;
-            public Query(int Id)
+            public Query(int id)
             {
-                UserId = Id;
+                UserId = id;
             }
         }
 
-        public class Handler : IRequestHandler<Query, CompanyDTO>
+        public class Handler : IRequestHandler<Query, CompanyDto>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -27,16 +27,16 @@ namespace Application.Companies
                 _context = context;
                 _mapper = mapper;
             }
-            public async Task<CompanyDTO> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<CompanyDto> Handle(Query request, CancellationToken cancellationToken)
             {
                 var result = await _context.Companies
                     .Include(x => x.Leader)
                     .Include(x => x.Members)
                     .FirstOrDefaultAsync(x => x.Id == request.UserId);
                 
-                var resultDTO = _mapper.Map<Company,CompanyDTO>(result);
+                var resultDto = _mapper.Map<Company,CompanyDto>(result);
 
-                return resultDTO;
+                return resultDto;
             }
         }
     }

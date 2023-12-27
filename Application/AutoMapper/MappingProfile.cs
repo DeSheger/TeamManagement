@@ -2,33 +2,33 @@ using Application.DTOs;
 using AutoMapper;
 using Domain;
 
-namespace Application.Mapping
+namespace Application.AutoMapper
 {
     public class MappingProfile : Profile
     {
         public MappingProfile()
         {
-            CreateMap<User, UserDTO>()
+            CreateMap<User, UserDto>()
             .ReverseMap();
 
-            CreateMap<User, SessionDTO>();
+            CreateMap<User, SessionDto>();
 
-            CreateMap<Company, CompanyDTO>()
+            CreateMap<Company, CompanyDto>()
                 .ForMember(dest => dest.Leader, opt => opt.MapFrom(src => src.Leader))
                 .ForMember(dest => dest.Members, opt => opt.MapFrom(src => src.Members))
                 .ReverseMap();
 
             
-            CreateMap<Group, GroupDTO>()
+            CreateMap<Group, GroupDto>()
                 .ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.Company.Id))
                 .ForMember(dest => dest.Leader, opt => opt.MapFrom(src => src.Leader))
                 .ForMember(dest => dest.Members, opt => opt.MapFrom(src => src.Members))
                 .ReverseMap();
 
-            CreateMap<Activity, ActivityDTO>()
+            CreateMap<Activity, ActivityDto>()
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author))
-                .ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.Company.Id))
-                .ForMember(dest => dest.GroupId, opt => opt.MapFrom(src => src.Group.Id))
+                .ForMember(dest => dest.Company, opt => opt.MapFrom(src => src.Company))
+                .ForMember(dest => dest.Group, opt => opt.MapFrom(src => src.Group))
                 .ForMember(dest => dest.Members, opt => opt.MapFrom(src => src.Members))
                 .ReverseMap();
 

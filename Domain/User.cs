@@ -12,18 +12,12 @@ namespace Domain
     {
         public string Name { get; set; } = null!;
         public string Surrname { get; set; } = null!;
-        public string? Bio { get; set; } = null;
-        [JsonIgnore]
-        public ICollection<Activity>? ActivitiesAuthor {get; set;} = new List<Activity>();
-        [JsonIgnore]
-        public ICollection<Activity>? ActivitiesToDo {get; set;} = new List<Activity>();
-        [JsonIgnore]
-        public ICollection<Group>? GroupsLeader {get; set;} = new List<Group>();
-        [JsonIgnore] 
-        public ICollection<Group>? GroupsMember {get; set;} = new List<Group>();
-        [JsonIgnore]
-        public ICollection<Company>? CompaniesLeader {get; set;} = new List<Company>();
-        [JsonIgnore]
-        public ICollection<Company>? CompaniesMember {get; set;} = new List<Company>();
+        public string? Bio { get; set; }
+        public ICollection<Activity> ActivitiesAuthor { get; set; } = new List<Activity>();
+        public ICollection<Activity> ActivitiesToDo { get; set; } = new List<Activity>();
+        public ICollection<Group> GroupsLeader {get; set;} = new List<Group>();
+        public ICollection<Group> GroupsMember {get; set;} = new List<Group>();
+        public ICollection<Company> CompaniesLeader {get; set;} = new List<Company>();
+        public ICollection<Company> CompaniesMember {get; set;} = new List<Company>();
     }
 }

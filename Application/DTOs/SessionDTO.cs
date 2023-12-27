@@ -1,6 +1,6 @@
 namespace Application.DTOs
 {
-    public class SessionDTO
+    public class SessionDto
     {
         public string Email { get; set; }
         public string Name { get; set;}

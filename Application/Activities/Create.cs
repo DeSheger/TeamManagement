@@ -11,7 +11,7 @@ namespace Application.Activities
     {
         public class Command : IRequest
         {
-            public ActivityDTO Activity;
+            public ActivityDto Activity;
         }
 
         public class Handler : IRequestHandler<Command>
@@ -27,43 +27,43 @@ namespace Application.Activities
             {
                 Activity activity = _mapper.Map<Activity>(request.Activity);
 
-                Company ExistCompany = await _context.Companies
+                Company existCompany = await _context.Companies
                     .Include(c => c.Leader)
                     .Include(c => c.Members)
                     .FirstOrDefaultAsync(c => c.Id == activity.Company.Id);
 
-                List<Group> CompanyGroups = await _context.Groups
+                List<Group> companyGroups = await _context.Groups
                     .Include(g => g.Company)
                     .Include(g => g.Leader)
-                    .Where(g => g.Company.Id == ExistCompany.Id)
+                    .Where(g => g.Company.Id == existCompany.Id)
                     .ToListAsync();
 
-                Group ExistGroup = null;
+                Group existGroup = null;
 
-                List<User> ExistMembers = new();
+                List<User> existMembers = new();
 
-                User ExistAuthor = null;
+                User existAuthor = null;
                 
                 // CHECK: IS GROUP IN COMPANY
-                foreach (var CompanyGroup in CompanyGroups)
+                foreach (var companyGroup in companyGroups)
                 {
-                    if (CompanyGroup.Id == activity.Group.Id)
-                        ExistGroup = await _context.Groups
+                    if (companyGroup.Id == activity.Group.Id)
+                        existGroup = await _context.Groups
                         .Include(g => g.Members)
                         .Include(g => g.Leader)
                         .FirstOrDefaultAsync(g => g.Id == activity.Group.Id);
                 }
 
                 // CHECK ARE MEMBERS IN GROUP
-                foreach (var GroupMember in ExistGroup.Members)
+                foreach (var groupMember in existGroup.Members)
                 {
-                    foreach(var ActivityMember in activity.Members)
+                    foreach(var activityMember in activity.Members)
                     {
-                        if(GroupMember.Id == ActivityMember.Id)
-                            ExistMembers.Add(await _context.Users.FindAsync(ActivityMember.Id));
+                        if(groupMember.Id == activityMember.Id)
+                            existMembers.Add(await _context.Users.FindAsync(activityMember.Id));
                     }
-                    if(GroupMember.Id == activity.Author.Id) // CHECK IS AUTHOR IN GROUP
-                        ExistAuthor = await _context.Users.FindAsync(GroupMember.Id);
+                    if(groupMember.Id == activity.Author.Id) // CHECK IS AUTHOR IN GROUP
+                        existAuthor = await _context.Users.FindAsync(groupMember.Id);
                 }
 
                 var result = new Activity()
@@ -72,10 +72,10 @@ namespace Application.Activities
                     DateStart = activity.DateStart,
                     DateEnd = activity.DateEnd,
                     Description = activity.Description,
-                    Company = ExistCompany,
-                    Group = ExistGroup,
-                    Author = ExistAuthor,
-                    Members = ExistMembers
+                    Company = existCompany,
+                    Group = existGroup,
+                    Author = existAuthor,
+                    Members = existMembers
                 };
 
                 _context.Activities.Add(result);

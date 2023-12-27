@@ -1,6 +1,6 @@
 namespace Application.DTOs
 {
-    public class RegisterDTO
+    public class RegisterDto
     {
         public int Id { get; set; }
         public string Email { get; set;}
