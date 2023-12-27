@@ -1578,11 +1578,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\TeamManagement\\Application\\Application.csproj",
+      "projectUniqueName": "D:\\Projects\\TeamManagement\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "C:\\Projects\\TeamManagement\\Application\\Application.csproj",
+      "projectPath": "D:\\Projects\\TeamManagement\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\grosz\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\TeamManagement\\Application\\obj\\",
+      "outputPath": "D:\\Projects\\TeamManagement\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\grosz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1597,11 +1597,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Projects\\TeamManagement\\Domain\\Domain.csproj"
+            "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj"
             },
-            "C:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
-              "projectPath": "C:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj"
+            "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj": {
+              "projectPath": "D:\\Projects\\TeamManagement\\Persistence\\Persistence.csproj"
             }
           }
         }
@@ -1641,7 +1641,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -773,11 +773,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
+      "projectUniqueName": "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "C:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
+      "projectPath": "D:\\Projects\\TeamManagement\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\grosz\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\TeamManagement\\Domain\\obj\\",
+      "outputPath": "D:\\Projects\\TeamManagement\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\grosz\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -825,7 +825,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }
