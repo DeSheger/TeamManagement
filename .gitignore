@@ -22,6 +22,10 @@ obj/
 
 bin/
 
+obj/*
+
+bin/*
+
 # Logs
 npm-debug.log
 debug
